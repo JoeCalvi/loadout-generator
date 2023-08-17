@@ -8,16 +8,24 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <span class="nav-link">Home</span>
+              <router-link class="nav-link" :to="{ name: 'home' }">
+                <span>Home</span>
+              </router-link>
             </li>
             <li class="nav-item">
-              <span class="nav-link">Perks</span>
+              <router-link class="nav-link" :to="{ name: 'perks' }">
+                <span>Perks</span>
+              </router-link>
             </li>
             <li class="nav-item">
-              <span class="nav-link">Survivors</span>
+              <router-link class="nav-link" :to="{ name: 'survivors' }">
+                <span>Survivors</span>
+              </router-link>
             </li>
             <li class="nav-item">
-              <span class="nav-link">Killers</span>
+              <router-link class="nav-link" :to="{ name: 'killers' }">
+                <span>Killers</span>
+              </router-link>
             </li>
           </ul>
         </div>
