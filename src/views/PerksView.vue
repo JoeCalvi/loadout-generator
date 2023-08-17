@@ -26,14 +26,44 @@ export default {
 
 <template>
   <div class="container-fluid">
+    <div class="row m-auto my-3">
+      <h3 class="text-center">Filter Perks</h3>
+        <form class="col-12" action="">
+          <div class="row m-auto d-flex justify-content-evenly align-items-center">
+            <div class="col-md-1 d-flex justify-content-center align-items-center my-2">
+              <button type="button" class="btn btn-outline-light">All</button>
+            </div>
+            <div class="col-md-1 d-flex justify-content-between align-items-center mb-2">
+              <label class="mb-1 me-4" for="">Survivor</label>
+              <input type="checkbox" name="" id="">
+            </div>
+            <div class="col-md-1 d-flex justify-content-between align-items-center mb-2">
+              <label class="mb-1" for="">Killer</label>
+              <input type="checkbox" name="" id="">
+            </div>
+            <div class="col-md-1 d-flex justify-content-between align-items-center mb-2">
+              <label class="mb-1 me-4" for="">Generic</label>
+              <input type="checkbox" name="" id="">
+            </div>
+          </div>
+        </form>
+    </div>
     <div class="row m-auto">
-      <div class="col-12 d-flex flex-column justify-content-center">
-        <div class="row m-auto">
-          <div class="col-3 d-flex justify-content-center align-items-center" v-for="perk in perks">
-              <img :src="perk.icon" alt="">
+        <div class="col-md-2 d-flex flex-column justify-content-center align-items-center p-3 mb-3" v-for="perk in perks">
+          <div class="perk-icon-background d-flex justify-content-center align-items-center m-3">
+            <img class="perk-icon" :src="perk.icon" alt="">
+          </div>
+          <div class="mt-3">
+            <h6 class="text-center">{{ perk.name }}</h6>
           </div>
         </div>
-      </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.filter-bar {
+  height: 80px;
+}
+
+</style>

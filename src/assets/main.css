@@ -20,7 +20,8 @@ footer {
 }
 
 .perk-icon-background {
-  background-color: purple;
+  background-color: black;
+  border: 1px solid white;
   height: 70px;
   width: 70px;
   rotate: 45deg;
