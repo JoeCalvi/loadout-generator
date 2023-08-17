@@ -1,18 +1,15 @@
 <script>
 import { computed, onMounted } from "vue";
-import { api } from "../Axios";
-import { AppState } from "../AppState"
-import { Perk } from "../models/Perk"
-import { Killer } from "../models/Killer"
-import { Survivor } from "../models/Survivor";
+import { AppState } from "../AppState";
+import { killersService } from "../services/KillersService";
+import { survivorsService } from "../services/SurvivorsService";
+import { perksService } from "../services/PerksService";
 
 export default {
   data() {
     async function getAllKillers () {
         try {
-          const res = await api.get('killers')
-          AppState.killers = res.data.map(k => new Killer(k));
-          console.log(AppState.killers);
+          await killersService.getAllKillers();
         } catch (error) {
           console.error(error);
         }
@@ -20,9 +17,7 @@ export default {
 
     async function getAllSurvivors () {
       try {
-        const res = await api.get('survivors');
-        AppState.survivors = res.data.map(s => new Survivor(s));
-        console.log(AppState.survivors)
+        await survivorsService.getAllSurvivors();
       } catch (error) {
         console.error(error)
       }
@@ -30,16 +25,16 @@ export default {
 
     async function getAllPerks () {
       try {
-        const res = await api.get('perks');
-        AppState.perks = res.data.map(p => new Perk(p));
-        console.log(AppState.perks)
+        perksService.getAllPerks();
       } catch (error) {
         console.error(error)
       }
     }
 
     onMounted(() => {
+      getAllKillers();
       getAllSurvivors();
+      getAllPerks();
     })
 
     return {
