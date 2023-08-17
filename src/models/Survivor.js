@@ -1,11 +1,8 @@
-export class Killer {
+export class Survivor {
   constructor(data) {
     this.id = data._id;
-    this.killer_name = data.killer_name;
-    this.original_name = data.original_name;
-    this.difficulty_rating = data.difficulty_rating;
-    this.height = data.height;
-    this.movement_speed = data.movement_speed;
+    this.name = data.name;
+    this.role = data.role;
     this.overview = data.overview;
     this.gender = data.gender;
     this.portrait = handlePortraitURL(data);
@@ -17,14 +14,7 @@ export class Killer {
     this.perk_two_id = data.perk_two_id;
     this.perk_three = data.perk_three;
     this.perk_three_id = data.perk_three_id;
-    this.power = data.power;
-    this.power_id = data.power_id;
-    this.realm = data.realm;
-    this.realm_id = data.realm_id;
-    this.terror_radius = data.terror_radius;
     this.voice_actor = data.voice_actor;
-    this.weapon = data.weapon;
-    this.weapon_id = data.weapon_id;
   }
 }
 
