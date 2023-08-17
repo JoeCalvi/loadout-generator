@@ -1,10 +1,11 @@
 <script setup>
 import { RouterView } from 'vue-router'
+import NavBar from "./components/icons/NavBar.vue";
 </script>
 
 <template>
-  <header>
-
+  <header class="navbar navbar-expand-lg">
+    <NavBar />
   </header>
   <main>
     <RouterView />

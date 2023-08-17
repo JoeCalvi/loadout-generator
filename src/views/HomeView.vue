@@ -25,7 +25,7 @@ export default {
 
     async function getAllPerks () {
       try {
-        perksService.getAllPerks();
+        await perksService.getAllPerks();
       } catch (error) {
         console.error(error)
       }
@@ -41,7 +41,6 @@ export default {
       perks: computed(() => AppState.perks),
       killers: computed(() => AppState.killers),
       survivors: computed(() => AppState.survivors)
-      
     }
   }
 }
