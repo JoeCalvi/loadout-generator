@@ -1,0 +1,31 @@
+
+header {
+  width: 100vw;
+  height: 80px;
+  background-color: darkred;
+}
+
+main {
+  width: 100vw;
+  height: calc(100vh - 140px);
+  overflow-y: auto;
+  background-color: black;
+  color: white;
+}
+
+footer {
+  width: 100vw;
+  height: 60px;
+  background-color: darkred;
+}
+
+.perk-icon-background {
+  background-color: purple;
+  height: 70px;
+  width: 70px;
+  rotate: 45deg;
+}
+
+.perk-icon {
+  rotate: -45deg;
+}
