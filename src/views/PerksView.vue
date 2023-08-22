@@ -105,6 +105,8 @@ export default {
             AppState.pageNumber--;
           }
       }
+      const main = document.getElementById("main")
+      main.scrollTop = 0
       },
 
       nextPage () {
@@ -127,6 +129,8 @@ export default {
               AppState.pageNumber++;
             }
         }
+        const main = document.getElementById("main")
+        main.scrollTop = 0
       },
 
       survivorOnly () {
@@ -153,7 +157,7 @@ export default {
 
 <template>
   <div class="container-fluid">
-    <div class="row m-auto justify-content-center my-3">
+    <div class="row m-auto justify-content-center my-3" id="filterBar">
       <h3 class="text-center">Filter Perks</h3>
         <div class="col-8">
           <div class="row m-auto justify-content-evenly align-items-center">
@@ -192,7 +196,7 @@ export default {
         </button>
       </div>
       <div class="col-6 text-start ps-3">
-        <button @click="nextPage()" class="btn btn-outline-light">
+        <button @click="nextPage()"  class="btn btn-outline-light">
           Next
         </button>
       </div>
