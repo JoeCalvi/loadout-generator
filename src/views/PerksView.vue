@@ -132,16 +132,19 @@ export default {
       survivorOnly () {
         AppState.survivorPerksOnly = true;
         AppState.killerPerksOnly = false;
+        AppState.pageNumber = 1;
       },
 
       killerOnly () {
         AppState.killerPerksOnly = true;
         AppState.survivorPerksOnly = false;
+        AppState.pageNumber = 1;
       },
 
       allPerks () {
         AppState.survivorPerksOnly = false;
         AppState.killerPerksOnly = false;
+        AppState.pageNumber = 1;
       }
     }
   }
