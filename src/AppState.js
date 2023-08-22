@@ -4,5 +4,7 @@ export const AppState = reactive({
   perks: [],
   killers: [],
   survivors: [], 
-  pageNumber: 1
+  pageNumber: 1,
+  survivorPerksOnly: false,
+  killerPerksOnly: false
 })
