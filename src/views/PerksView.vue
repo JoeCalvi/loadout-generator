@@ -4,7 +4,9 @@ import { AppState } from "../AppState";
 import { perksService } from "../services/PerksService";
 
 export default {
-  data() {
+  data() {  
+
+
     async function getAllPerks () {
       try {
         await perksService.getAllPerks();
@@ -18,7 +20,22 @@ export default {
     })
 
     return {
-      perks: computed(() => AppState.perks)
+      perks: computed(() => AppState.perks),
+      pageNumber: computed(() => AppState.pageNumber),
+
+      previousPage () {
+        if (AppState.pageNumber > 1 ) {
+          AppState.pageNumber--;
+          console.log(AppState.pageNumber)
+        }
+    },
+
+      nextPage () {
+        if (AppState.pageNumber < 10) {
+          AppState.pageNumber++;
+          console.log(AppState.pageNumber)
+        }
+    }
     }
   }
 }
@@ -57,6 +74,18 @@ export default {
             <h6 class="text-center">{{ perk.name }}</h6>
           </div>
         </div>
+    </div>
+    <div class="row m-auto">
+      <div class="col-6 text-end pe-3">
+        <button @click="previousPage(pageNumber)" :disabled="pageNumber == 1" class="btn btn-outline-light">
+          Previous
+        </button>
+      </div>
+      <div class="col-6 text-start ps-3">
+        <button @click="nextPage(pageNumber)" :disabled="pageNumber == 10" class="btn btn-outline-light">
+          Next
+        </button>
+      </div>
     </div>
   </div>
 </template>
