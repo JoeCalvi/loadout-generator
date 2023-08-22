@@ -98,6 +98,36 @@ class PerksService {
       console.error(error)
     }
   }
+
+  async getAllGenericPerks() {
+    try {
+      const res = await api.get('perks/generic');
+      AppState.perks = res.data.map(p => new Perk(p));
+      // console.log(AppState.perks)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  async getAllGenericSurvivorPerks() {
+    try {
+      const res = await api.get('perks/survivor/generic');
+      AppState.perks = res.data.map(p => new Perk(p));
+      // console.log(AppState.perks);
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  async getAllGenericKillerPerks() {
+    try {
+      const res = await api.get('perks/killer/generic');
+      AppState.perks = res.data.map(p => new Perk(p));
+      console.log(AppState.perks);
+    } catch (error) {
+      console.error(error)
+    }
+  }
 }
 
 export const perksService = new PerksService();

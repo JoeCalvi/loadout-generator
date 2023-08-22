@@ -30,16 +30,46 @@ export default {
         console.error(error)
       }
     }
+
+    async function getAllGenericPerks () {
+      try {
+        await perksService.getAllGenericPerks();
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    async function getAllGenericSurvivorPerks () {
+      try {
+        await perksService.getAllGenericSurvivorPerks();
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    async function getAllGenericKillerPerks () {
+      try {
+        await perksService.getAllGenericKillerPerks();
+      } catch (error) {
+        console.error(error)
+      }
+    }
  
     onMounted(() => {
       getAllPerks()
     })
 
     watchEffect(() => {
-      if (AppState.killerPerksOnly == true) {
+      if (AppState.survivorPerksOnly == true && editable.value.generic == true) {
+        getAllGenericSurvivorPerks();
+      } else if (AppState.killerPerksOnly == true && editable.value.generic == true) {
+        getAllGenericKillerPerks();
+      } else if (AppState.killerPerksOnly == true) {
         getAllKillerPerks();
       } else if (AppState.survivorPerksOnly == true) {
         getAllSurvivorPerks();
+      } else if (AppState.killerPerksOnly == false && AppState.survivorPerksOnly == false && editable.value.generic == true) {
+        getAllGenericPerks();
       } else if (AppState.killerPerksOnly == false && AppState.survivorPerksOnly == false) {
         getAllPerks();
       }
@@ -125,13 +155,13 @@ export default {
         <div class="col-8">
           <div class="row m-auto justify-content-evenly align-items-center">
             <div class="col-md-2 d-flex justify-content-center align-items-center my-2">
-              <button @click="survivorOnly()" type="button" class="btn btn-outline-warning">Survivor</button>
+              <button @click="survivorOnly()" type="button" class="btn btn-outline-warning" :disabled="survivorPerksOnly == true">Survivor</button>
             </div>
             <div class="col-md-2 d-flex justify-content-center align-items-center my-2">
-              <button @click="allPerks()" type="button" class="btn btn-outline-light">All</button>
+              <button @click="allPerks()" type="button" class="btn btn-outline-light" :disabled="survivorPerksOnly == false && killerPerksOnly == false">All</button>
             </div>
             <div class="col-md-2 d-flex justify-content-center align-items-center my-2">
-              <button @click="killerOnly()" type="button" class="btn btn-outline-danger">Killer</button>
+              <button @click="killerOnly()" type="button" class="btn btn-outline-danger" :disabled="killerPerksOnly == true">Killer</button>
             </div>
           </div>
           <div class="row m-auto pt-3 justify-content-center align-items-center">
@@ -152,7 +182,7 @@ export default {
           </div>
         </div>
     </div>
-    <div class="row m-auto mb-3">
+    <div v-if="editable.generic == false" class="row m-auto mb-3">
       <div class="col-6 text-end pe-3">
         <button @click="previousPage()" class="btn btn-outline-light">
           Previous
