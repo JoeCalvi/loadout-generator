@@ -2,6 +2,7 @@
 import { computed, onMounted, watchEffect, ref } from "vue";
 import { AppState } from "../AppState";
 import { perksService } from "../services/PerksService";
+import { statusEffectsService } from "../services/StatusEffectsService";
 
 export default {
   data() {  
@@ -56,7 +57,8 @@ export default {
     }
  
     onMounted(() => {
-      getAllPerks()
+      getAllPerks();
+      statusEffectsService.getAllStatusEffects();
     })
 
     watchEffect(() => {
