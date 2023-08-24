@@ -7,7 +7,7 @@ class StatusEffectsService {
     try {
       const res = await api.get('status_effects')
       AppState.statusEffects = res.data.map(e => new StatusEffect(e))
-      console.log(AppState.statusEffects)
+      // console.log(AppState.statusEffects)
     } catch (error) {
       console.error(error)
     }

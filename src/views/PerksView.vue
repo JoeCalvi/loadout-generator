@@ -238,6 +238,12 @@ export default {
                 <i>
                   {{ activePerk.description }}
                 </i>
+                <div v-if="activePerk.associated_status_effects.length > 0">
+                  <h6 class="mt-2">Associated Status Effects</h6>
+                  <div>
+                    <img v-for="effect in activePerk.associated_status_effects" class="status-effect-icon" :src="effect.icon" alt="">
+                  </div>
+                </div>
               </div>
             </div>
           </div>

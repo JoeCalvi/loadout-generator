@@ -1,6 +1,8 @@
 import { api } from "../Axios";
 import { AppState } from "../AppState";
 import { Perk } from "../models/Perk";
+import { StatusEffect } from "../models/StatusEffect";
+import { statusEffectsService } from "./StatusEffectsService";
 
 class PerksService {
   async getAllPerks () {
@@ -133,6 +135,16 @@ class PerksService {
     try {
       const res = await api.get(`perks/${perkId}`)
       AppState.activePerk = new Perk(res.data)
+
+      if (AppState.activePerk.associated_status_effects.length > 0) {
+        AppState.activePerk.associated_status_effects.forEach(e => {
+          const googleDriveURL = e.icon;
+          const fileId = googleDriveURL.slice(32, 65)
+          const iconLink = `https://drive.google.com/uc?id=${fileId}`
+          e.icon = iconLink
+        });
+      }
+      
       console.log(AppState.activePerk)
     } catch (error) {
       console.error(error)
