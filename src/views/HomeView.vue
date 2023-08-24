@@ -17,10 +17,49 @@ export default {
 
 <template>
   <div class="container-fluid">
-    <div class="row m-auto">
-      <div class="col-12 d-flex justify-content-center">
-        <h1 class="text-light">Welcome to my Dead By Daylight Loadout Builder!</h1>
+    <div class="row m-auto justify-content-center">
+      <div class="col-md-6 loadout-section d-flex flex-column justify-content-center align-items-center">
+          <div class="row w-100 justify-content-center">
+            <div class="col-md-2 d-flex justify-content-center">
+              <div class="perk-icon-background perk-one"></div>
+            </div>
+          </div>
+          <div class="row w-100 justify-content-center">
+            <div class="col-md-2 d-flex justify-content-center me-3">
+              <div class="perk-icon-background perk-two"></div>
+            </div>
+            <div class="col-md-2 d-flex justify-content-center ms-3">
+              <div class="perk-icon-background perk-three"></div>
+            </div>
+          </div>
+          <div class="row w-100 justify-content-center">
+            <div class="col-md-2 d-flex justify-content-center">
+              <div class="perk-icon-background perk-four"></div>
+            </div>
+          </div>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.loadout-section {
+  height: 40vh;
+}
+
+.perk-one {
+
+}
+
+.perk-two {
+  
+}
+
+.perk-three {
+  
+}
+
+.perk-four {
+  
+}
+</style>
