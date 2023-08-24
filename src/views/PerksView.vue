@@ -228,13 +228,15 @@ export default {
                 <img class="perk-icon" :src="activePerk.icon" alt="">
               </div>
             </div>
-            <div class="col-10">
-              <h6 v-if="activePerk.generic == true">Generic {{ activePerk.role }} Perk</h6>
-              <h6 v-if="activePerk.role == 'Survivor' && activePerk.generic == false">{{ activePerk.survivor.name }} Perk</h6>
-              <h6 v-if="activePerk.role == 'Killer' && activePerk.generic == false">{{ activePerk.killer.killer_name }} Perk</h6>
-              <i>
-                {{ activePerk.description }}
-              </i>
+            <div class="col-10 d-flex justify-content-center align-items-center">
+              <div>
+                <h6 v-if="activePerk.generic == true">Generic {{ activePerk.role }} Perk</h6>
+                <h6 v-if="activePerk.role == 'Survivor' && activePerk.generic == false">{{ activePerk.survivor.name }} Perk</h6>
+                <h6 v-if="activePerk.role == 'Killer' && activePerk.generic == false">{{ activePerk.killer.killer_name }} Perk</h6>
+                <i>
+                  {{ activePerk.description }}
+                </i>
+              </div>
             </div>
           </div>
         </div>
