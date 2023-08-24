@@ -224,24 +224,33 @@ export default {
       </div>
       <div class="modal-body">
         <div class="container p-3">
-          <div class="row">
+          <div class="row m-auto">
             <div class="col-2 d-flex align-items-center justify-content-center">
               <div class="perk-icon-background d-flex justify-content-center align-items-center m-3">
-                <img class="perk-icon" :src="activePerk.icon" alt="">
+                <img class="perk-icon" :src="activePerk.icon" :alt="activePerk.name" :title="activePerk.name">
               </div>
             </div>
             <div class="col-10 d-flex justify-content-center align-items-center">
-              <div>
+              <div class="row m-auto">
                 <h6 v-if="activePerk.generic == true">Generic {{ activePerk.role }} Perk</h6>
                 <h6 v-if="activePerk.role == 'Survivor' && activePerk.generic == false">{{ activePerk.survivor.name }} Perk</h6>
                 <h6 v-if="activePerk.role == 'Killer' && activePerk.generic == false">{{ activePerk.killer.killer_name }} Perk</h6>
-                <i>
+                <i class="px-4">
                   {{ activePerk.description }}
                 </i>
-                <div v-if="activePerk.associated_status_effects.length > 0">
+                <div class="col-12" v-if="activePerk.associated_status_effects.length > 0">
                   <h6 class="mt-2">Associated Status Effects</h6>
-                  <div>
-                    <img v-for="effect in activePerk.associated_status_effects" class="status-effect-icon" :src="effect.icon" alt="">
+                  <div class="row m-auto">
+                    <div v-for="effect in activePerk.associated_status_effects" class="col-1 p-0 d-flex justify-content-center align-items-center">
+                      <img class="status-effect-icon" :src="effect.icon" :alt="effect.name" :title="effect.name" data-bs-toggle="collapse" :data-bs-target="'#'+ effect._id">
+                    </div>
+                    <div v-for="effect in activePerk.associated_status_effects" class="collapse mt-3" :id="effect._id">
+                      <div class="card card-body bg-dark border-light text-light">
+                        <i>
+                          {{ effect.description }}
+                        </i>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
