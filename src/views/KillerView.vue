@@ -57,7 +57,7 @@ export default {
         <div class="row m-auto mb-3 w-100 align-items-center">
           <div class="col-md-2 d-flex justify-content-center mb-3">
             <div class="perk-icon-background d-flex justify-content-center align-items-center m-3">
-              <img class="perk-icon" :src="killer.perk_one.icon" alt="">
+              <img class="perk-icon" :src="killer.perk_one.icon" :alt="killer.perk_one.name" :title="killer.perk_one.name">
             </div>
           </div>
           <div class="col-md-10 d-flex flex-column justify-content-center">
@@ -72,7 +72,7 @@ export default {
         <div class="row m-auto mb-3 w-100 align-items-center">
           <div class="col-md-2 d-flex justify-content-center mb-3">
             <div class="perk-icon-background d-flex justify-content-center align-items-center m-3">
-              <img class="perk-icon" :src="killer.perk_two.icon" alt="">
+              <img class="perk-icon" :src="killer.perk_two.icon" :alt="killer.perk_two.name" :title="killer.perk_two.name">
             </div>
           </div>
           <div class="col-md-10 d-flex flex-column justify-content-center">
@@ -87,7 +87,7 @@ export default {
         <div class="row m-auto mb-3 w-100 align-items-center">
           <div class="col-md-2 d-flex justify-content-center mb-3">
             <div class="perk-icon-background d-flex justify-content-center align-items-center m-3">
-              <img class="perk-icon" :src="killer.perk_three.icon" alt="">
+              <img class="perk-icon" :src="killer.perk_three.icon" :alt="killer.perk_three.name" :title="killer.perk_three.name">
             </div>
           </div>
           <div class="col-md-10 d-flex flex-column justify-content-center">

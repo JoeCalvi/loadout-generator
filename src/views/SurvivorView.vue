@@ -57,7 +57,7 @@ export default {
         <div class="row m-auto mb-3 w-100 align-items-center">
           <div class="col-md-2 d-flex justify-content-center mb-3">
             <div class="perk-icon-background d-flex justify-content-center align-items-center m-3">
-              <img class="perk-icon" :src="survivor.perk_one.icon" alt="">
+              <img class="perk-icon" :src="survivor.perk_one.icon" :alt="survivor.perk_one.name" :title="survivor.perk_one.name">
             </div>
           </div>
           <div class="col-md-10 d-flex flex-column justify-content-center">
@@ -72,7 +72,7 @@ export default {
         <div class="row m-auto mb-3 w-100 align-items-center">
           <div class="col-md-2 d-flex justify-content-center mb-3">
             <div class="perk-icon-background d-flex justify-content-center align-items-center m-3">
-              <img class="perk-icon" :src="survivor.perk_two.icon" alt="">
+              <img class="perk-icon" :src="survivor.perk_two.icon" :alt="survivor.perk_two.name" :title="survivor.perk_two.name">
             </div>
           </div>
           <div class="col-md-10 d-flex flex-column justify-content-center">
@@ -87,7 +87,7 @@ export default {
         <div class="row m-auto mb-3 w-100 align-items-center">
           <div class="col-md-2 d-flex justify-content-center mb-3">
             <div class="perk-icon-background d-flex justify-content-center align-items-center m-3">
-              <img class="perk-icon" :src="survivor.perk_three.icon" alt="">
+              <img class="perk-icon" :src="survivor.perk_three.icon" :alt="survivor.perk_three.name" :title="survivor.perk_three.name">
             </div>
           </div>
           <div class="col-md-10 d-flex flex-column justify-content-center">
