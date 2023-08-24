@@ -27,12 +27,10 @@ export default {
 <template>
   <div class="container-fluid">
     <div class="row m-auto">
-      <div class="col-12 d-flex flex-column justify-content-center">
-        <div class="row m-auto">
-          <div class="col-3 d-flex justify-content-center align-items-center" v-for="killer in killers">
-              <img :src="killer.portrait" alt="">
-          </div>
-        </div>
+      <div v-for="killer in killers" class="col-md-3 d-flex flex-column justify-content-center mb-3">
+        <router-link class="d-flex justify-content-center" :to="{ name: 'killer', params: { killerId: killer.id} }">
+          <img class="selectable" :src="killer.portrait" :alt="killer.killer_name" :title="killer.killer_name">
+        </router-link>
       </div>
     </div>
   </div>

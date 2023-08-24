@@ -4,6 +4,7 @@ import PerksView from '../views/PerksView.vue'
 import SurvivorsView from '../views/SurvivorsView.vue'
 import SurvivorView from '../views/SurvivorView.vue'
 import KillersView from '../views/KillersView.vue'
+import KillerView from '../views/KillerView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,11 @@ const router = createRouter({
       path: '/killers',
       name: 'killers',
       component: KillersView
+    },
+    {
+      path: '/killers/:killerId',
+      name: 'killer',
+      component: KillerView
     },
   ]
 })
