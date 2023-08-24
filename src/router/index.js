@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import PerksView from '../views/PerksView.vue'
 import SurvivorsView from '../views/SurvivorsView.vue'
+import SurvivorView from '../views/SurvivorView.vue'
 import KillersView from '../views/KillersView.vue'
 
 const router = createRouter({
@@ -21,6 +22,11 @@ const router = createRouter({
       path: '/survivors',
       name: 'survivors',
       component: SurvivorsView
+    },
+    {
+      path: '/survivors/:survivorId',
+      name: 'survivor',
+      component: SurvivorView
     },
     {
       path: '/killers',

@@ -27,12 +27,10 @@ export default {
 <template>
   <div class="container-fluid">
     <div class="row m-auto">
-      <div class="col-12 d-flex flex-column justify-content-center">
-        <div class="row m-auto">
-          <div class="col-3 d-flex justify-content-center align-items-center" v-for="survivor in survivors">
-              <img :src="survivor.portrait" alt="">
-          </div>
-        </div>
+      <div v-for="survivor in survivors" class="col-md-3 d-flex flex-column justify-content-center">
+        <router-link :to="{ name: 'survivor', params: { survivorId: survivor.id} }">
+          <img class="selectable" :src="survivor.portrait" :alt="survivor.name" :title="survivor.name">
+        </router-link>
       </div>
     </div>
   </div>
