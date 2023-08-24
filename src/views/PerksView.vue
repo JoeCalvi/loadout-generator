@@ -193,7 +193,7 @@ export default {
     <div class="row m-auto">
         <div class="col-md-2 d-flex flex-column justify-content-center align-items-center p-3 mb-3" v-for="perk in perks">
           <div class="perk-icon-background d-flex justify-content-center align-items-center m-3">
-            <img @click="setActivePerk(`${perk.id}`)" class="perk-icon selectable" :src="perk.icon" alt="" data-bs-toggle="modal" data-bs-target="#activePerkModal">
+            <img @click="setActivePerk(`${perk.id}`)" class="perk-icon selectable" :src="perk.icon" :alt="perk.name" :title="perk.name" data-bs-toggle="modal" data-bs-target="#activePerkModal">
           </div>
           <div class="mt-3">
             <h6 class="text-center">{{ perk.name }}</h6>
@@ -242,7 +242,7 @@ export default {
                   <h6 class="mt-2">Associated Status Effects</h6>
                   <div class="row m-auto">
                     <div v-for="effect in activePerk.associated_status_effects" class="col-1 p-0 d-flex justify-content-center align-items-center">
-                      <img class="status-effect-icon" :src="effect.icon" :alt="effect.name" :title="effect.name" data-bs-toggle="collapse" :data-bs-target="'#'+ effect._id">
+                      <img class="status-effect-icon selectable" :src="effect.icon" :alt="effect.name" :title="effect.name" data-bs-toggle="collapse" :data-bs-target="'#'+ effect._id">
                     </div>
                     <div v-for="effect in activePerk.associated_status_effects" class="collapse mt-3" :id="effect._id">
                       <div class="card card-body bg-dark border-light text-light">
