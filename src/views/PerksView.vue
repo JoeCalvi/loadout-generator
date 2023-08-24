@@ -77,6 +77,7 @@ export default {
 
     return {
       perks: computed(() => AppState.perks),
+      activePerk: computed(() => AppState.activePerk),
       pageNumber: computed(() => AppState.pageNumber),
       survivorPerksOnly: computed(() => AppState.survivorPerksOnly),
       killerPerksOnly: computed(() => AppState.killerPerksOnly),
@@ -149,6 +150,14 @@ export default {
         AppState.survivorPerksOnly = false;
         AppState.killerPerksOnly = false;
         AppState.pageNumber = 1;
+      },
+
+      async setActivePerk (perkId) {
+        try {
+          await perksService.getPerkById(perkId);
+        } catch (error) {
+          console.error(error)
+        }
       }
     }
   }
@@ -182,7 +191,7 @@ export default {
     <div class="row m-auto">
         <div class="col-md-2 d-flex flex-column justify-content-center align-items-center p-3 mb-3" v-for="perk in perks">
           <div class="perk-icon-background d-flex justify-content-center align-items-center m-3">
-            <img class="perk-icon" :src="perk.icon" alt="">
+            <img @click="setActivePerk(`${perk.id}`)" class="perk-icon selectable" :src="perk.icon" alt="" data-bs-toggle="modal" data-bs-target="#activePerkModal">
           </div>
           <div class="mt-3">
             <h6 class="text-center">{{ perk.name }}</h6>
@@ -202,11 +211,42 @@ export default {
       </div>
     </div>
   </div>
+
+
+  <!-- Modal -->
+<div class="modal fade" id="activePerkModal" tabindex="-1" aria-labelledby="activePerkModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content bg-dark border-white" v-if="activePerk != null">
+      <div class="modal-header">
+        <h1  class="modal-title fs-5" id="activePerkModalLabel">{{ activePerk.name }}</h1>
+      </div>
+      <div class="modal-body">
+        <div class="container p-3">
+          <div class="row">
+            <div class="col-2 d-flex align-items-center justify-content-center">
+              <div class="perk-icon-background d-flex justify-content-center align-items-center m-3">
+                <img class="perk-icon" :src="activePerk.icon" alt="">
+              </div>
+            </div>
+            <div class="col-10">
+              <h6 v-if="activePerk.generic == true">Generic {{ activePerk.role }} Perk</h6>
+              <h6 v-if="activePerk.role == 'Survivor' && activePerk.generic == false">{{ activePerk.survivor.name }} Perk</h6>
+              <h6 v-if="activePerk.role == 'Killer' && activePerk.generic == false">{{ activePerk.killer.killer_name }} Perk</h6>
+              <i>
+                {{ activePerk.description }}
+              </i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
 
 <style scoped>
-.filter-bar {
-  height: 80px;
-}
 
 </style>

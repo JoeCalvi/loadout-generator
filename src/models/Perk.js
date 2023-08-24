@@ -8,6 +8,7 @@ export class Perk {
     this.chapter = data.chapter;
     this.chapter_id = data.chapter_id;
     this.generic = data.generic;
+    this.associated_status_effects = data.associated_status_effects;
     this.killer = data.killer;
     this.killer_id = data.killer_id;
     this.survivor = data.survivor;

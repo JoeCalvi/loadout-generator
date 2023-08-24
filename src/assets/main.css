@@ -29,3 +29,7 @@ footer {
 .perk-icon {
   rotate: -45deg;
 }
+
+.selectable {
+  cursor: pointer;
+}

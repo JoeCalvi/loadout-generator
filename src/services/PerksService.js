@@ -128,6 +128,16 @@ class PerksService {
       console.error(error)
     }
   }
+
+  async getPerkById(perkId) {
+    try {
+      const res = await api.get(`perks/${perkId}`)
+      AppState.activePerk = new Perk(res.data)
+      console.log(AppState.activePerk)
+    } catch (error) {
+      console.error(error)
+    }
+  }
 }
 
 export const perksService = new PerksService();
