@@ -1,6 +1,7 @@
 import { reactive } from "vue";
 
 export const AppState = reactive({
+  loadout: [],
   perks: [],
   activePerk: null,
   killers: [],
