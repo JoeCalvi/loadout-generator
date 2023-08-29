@@ -3,6 +3,7 @@ import { computed, onMounted, watchEffect } from "vue";
 import { AppState } from "../AppState";
 import { perksService } from "../services/PerksService";
 import { survivorsService } from "../services/SurvivorsService";
+import { killersService } from "../services/KillersService";
 import LoadoutBar from "../components/LoadoutBar.vue";
 import PerkBreakdown from "../components/PerkBreakdown.vue"
 
@@ -12,7 +13,7 @@ export default {
             try {
                 AppState.loadout = [];
                 if (role == "Survivor") {
-                    getRandomSurvivor();
+                    await getRandomSurvivor();
                     for (let i = 0; AppState.loadout.length < 4; i++) {
                         const pageMin = 1;
                         const pageMax = 5;
@@ -33,6 +34,7 @@ export default {
                     console.log("loadout size:", AppState.loadout.length, "loadout:", AppState.loadout);
                 }
                 if (role == "Killer") {
+                    await getRandomKiller();
                     for (let i = 0; AppState.loadout.length < 4; i++) {
                         const pageMin = 1;
                         const pageMax = 4;
@@ -57,6 +59,7 @@ export default {
                 console.error(error);
             }
         }
+
         async function getRandomSurvivor() {
             try {
                 AppState.activeSurvivor = null;
@@ -71,7 +74,24 @@ export default {
                 console.error(error);
             }
         }
+
+        async function getRandomKiller() {
+            try {
+              AppState.activeKiller = null;
+              await killersService.getAllKillers();
+              const indexMin = 0;
+              const indexMax = AppState.killers.length - 1;
+              const randomKillerIndex = Math.floor(Math.random() * (indexMax - indexMin + 1) + indexMin);
+              AppState.activeKiller = AppState.killers[randomKillerIndex];
+              console.log("random killer:", AppState.activeKiller.killer_name)
+            } catch (error) {
+              console.error(error)
+            }
+        }
+
         onMounted(() => {
+            AppState.survivorPerksOnly = true;
+            AppState.killerPerksOnly = false;
             generateRandomLoadout("Survivor");
             getRandomSurvivor();
         });
@@ -81,7 +101,24 @@ export default {
         return {
             generateRandomLoadout,
             loadout: computed(() => AppState.loadout),
-            activeSurvivor: computed(() => AppState.activeSurvivor)
+            activeSurvivor: computed(() => AppState.activeSurvivor),
+            activeKiller: computed(() => AppState.activeKiller),
+            survivorOnly: computed(() => AppState.survivorPerksOnly),
+            killerOnly: computed(() => AppState.killerPerksOnly),
+
+            survivorRollsOnly () {
+              if (AppState.survivorPerksOnly == false) {
+                AppState.survivorPerksOnly = true;
+                AppState.killerPerksOnly = false;
+              } 
+            },
+
+            killerRollsOnly () {
+              if (AppState.killerPerksOnly == false) {
+                AppState.killerPerksOnly = true;
+                AppState.survivorPerksOnly = false;
+              }
+            }
         };
     },
     components: { LoadoutBar, PerkBreakdown }
@@ -102,13 +139,15 @@ export default {
         <div class="row d-none d-md-flex justify-content-end mb-3">
           <div class="col-md-3 d-flex justify-content-end gap-3">
             <button @click="generateRandomLoadout('Survivor')" class="btn btn-outline-light">Reroll</button>
-            <button class="btn btn-danger">Killer</button>
+            <button v-if="survivorOnly" @click="killerRollsOnly" class="btn btn-danger">Killer</button>
+            <button v-if="killerOnly" @click="survivorRollsOnly" class="btn btn-warning">Survivor</button>
           </div>
         </div>
         <div class="row d-flex d-md-none justify-content-center mb-3">
           <div class="col-md-3 d-flex justify-content-center gap-3">
             <button @click="generateRandomLoadout('Survivor')" class="btn btn-outline-light">Reroll</button>
-            <button class="btn btn-danger">Killer</button>
+            <button v-if="survivorOnly" @click="killerRollsOnly" class="btn btn-danger">Killer</button>
+            <button v-if="killerOnly" @click="survivorRollsOnly" class="btn btn-warning">Survivor</button>
           </div>
         </div>
         <LoadoutBar :loadout="loadout"/>
