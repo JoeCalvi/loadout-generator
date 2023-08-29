@@ -40,7 +40,7 @@ export default {
           <h5>{{ survivor.name }}</h5>
           <i><h6>{{ survivor.role }}</h6></i>
         </div>
-        <div>
+        <div class="mb-3">
           <i>{{ survivor.overview }}</i>
         </div>
       </div>
@@ -58,7 +58,7 @@ export default {
               <Perk :perk="survivor.perk_two"/>
             </div>
         </div>
-        <div class="col-12 d-flex align-items-center justify-content-center">
+        <div class="col-12 d-flex align-items-center justify-content-center mb-3">
             <div class="row w-100 m-auto py-4 justify-content-between align-items-center border-bottom border-white border-opacity-25">
               <Perk :perk="survivor.perk_three" />
             </div>

@@ -29,8 +29,10 @@ export default {
               </div>
               <div class="col-md-9 mb-3 d-flex flex-column justify-content-center">
                 <h5 v-if="loadout[0]" class="mb-0">{{ loadout[0].name }}</h5>
-                <p v-if="loadout[0] && loadout[0].survivor"><span class="text-danger">{{ loadout[0].survivor.name }}</span> Perk</p>
-                <p v-if="loadout[0] && !loadout[0].survivor">General Survivor Perk</p>
+                <p v-if="loadout[0] && loadout[0].role == 'Survivor' && loadout[0].survivor"><span class="text-danger">{{ loadout[0].survivor.name }}</span> Perk</p>
+                <p v-if="loadout[0] && loadout[0].role == 'Survivor' && !loadout[0].survivor">General Survivor Perk</p>
+                <p v-if="loadout[0] && loadout[0].role == 'Killer' && loadout[0].killer"><span class="text-danger">{{ loadout[0].killer.killer_name }}</span> Perk</p>
+                <p v-if="loadout[0] && loadout[0].role == 'Killer' && !loadout[0].killer">General Killer Perk</p>
                 <i v-if="loadout[0]">{{ loadout[0].description }}</i>
               </div>
             </div>
@@ -46,8 +48,10 @@ export default {
               </div>
               <div class="col-md-9 mb-3 d-flex flex-column justify-content-center">
                 <h5 v-if="loadout[1]" class="mb-0">{{ loadout[1].name }}</h5>
-                <p v-if="loadout[1] && loadout[1].survivor"><span class="text-danger">{{ loadout[1].survivor.name }}</span> Perk</p>
-                <p v-if="loadout[1] && !loadout[1].survivor">General Survivor Perk</p>
+                <p v-if="loadout[1] && loadout[0].role == 'Survivor' && loadout[1].survivor"><span class="text-danger">{{ loadout[1].survivor.name }}</span> Perk</p>
+                <p v-if="loadout[1] && loadout[0].role == 'Survivor' && !loadout[1].survivor">General Survivor Perk</p>
+                <p v-if="loadout[1] && loadout[1].role == 'Killer' && loadout[1].killer"><span class="text-danger">{{ loadout[1].killer.killer_name }}</span> Perk</p>
+                <p v-if="loadout[1] && loadout[1].role == 'Killer' && !loadout[1].killer">General Killer Perk</p>
                 <i v-if="loadout[1]">{{ loadout[1].description }}</i>
               </div>
             </div>
@@ -63,8 +67,10 @@ export default {
               </div>
               <div class="col-md-9 mb-3 d-flex flex-column justify-content-center">
                 <h5 v-if="loadout[2]" class="mb-0">{{ loadout[2].name }}</h5>
-                <p v-if="loadout[2] && loadout[2].survivor"><span class="text-danger">{{ loadout[2].survivor.name }}</span> Perk</p>
-                <p v-if="loadout[2] && !loadout[2].survivor">General Survivor Perk</p>
+                <p v-if="loadout[2] && loadout[0].role == 'Survivor' && loadout[2].survivor"><span class="text-danger">{{ loadout[2].survivor.name }}</span> Perk</p>
+                <p v-if="loadout[2] && loadout[0].role == 'Survivor' && !loadout[2].survivor">General Survivor Perk</p>
+                <p v-if="loadout[2] && loadout[2].role == 'Killer' && loadout[2].killer"><span class="text-danger">{{ loadout[2].killer.killer_name }}</span> Perk</p>
+                <p v-if="loadout[2] && loadout[2].role == 'Killer' && !loadout[2].killer">General Killer Perk</p>
                 <i v-if="loadout[2]">{{ loadout[2].description }}</i>
               </div>
             </div>
@@ -80,8 +86,10 @@ export default {
               </div>
               <div class="col-md-9 mb-3 d-flex flex-column justify-content-center">
                 <h5 v-if="loadout[3]" class="mb-0">{{ loadout[3].name }}</h5>
-                <p v-if="loadout[3] && loadout[3].survivor"><span class="text-danger">{{ loadout[3].survivor.name }}</span> Perk</p>
-                <p v-if="loadout[3] && !loadout[3].survivor">General Survivor Perk</p>
+                <p v-if="loadout[3] && loadout[0].role == 'Survivor' && loadout[3].survivor"><span class="text-danger">{{ loadout[3].survivor.name }}</span> Perk</p>
+                <p v-if="loadout[3] && loadout[0].role == 'Survivor' && !loadout[3].survivor">General Survivor Perk</p>
+                <p v-if="loadout[3] && loadout[3].role == 'Killer' && loadout[3].killer"><span class="text-danger">{{ loadout[3].killer.killer_name }}</span> Perk</p>
+                <p v-if="loadout[3] && loadout[3].role == 'Killer' && !loadout[3].killer">General Killer Perk</p>
                 <i v-if="loadout[3]">{{ loadout[3].description }}</i>
               </div>
             </div>

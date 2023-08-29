@@ -108,17 +108,19 @@ export default {
             survivorOnly: computed(() => AppState.survivorPerksOnly),
             killerOnly: computed(() => AppState.killerPerksOnly),
 
-            survivorRollsOnly () {
+            async survivorRollsOnly () {
               if (AppState.survivorPerksOnly == false) {
                 AppState.survivorPerksOnly = true;
                 AppState.killerPerksOnly = false;
+                await generateRandomLoadout("Survivor")
               } 
             },
 
-            killerRollsOnly () {
+            async killerRollsOnly () {
               if (AppState.killerPerksOnly == false) {
                 AppState.killerPerksOnly = true;
                 AppState.survivorPerksOnly = false;
+                await generateRandomLoadout("Killer");
               }
             }
         };
