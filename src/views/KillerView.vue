@@ -45,7 +45,7 @@ export default {
         </div>
       </div>
       <div class="col-md-9 d-flex flex-column justify-content-evenly align-items-center">
-        <h3 class="w-100 text-center mb-3">Unique Perks</h3>
+        <h3 class="w-100 text-center my-4">Unique Perks</h3>
         <div class="row m-auto py-3 align-items-center">
           <div class="col-12 d-flex align-items-center justify-content-center">
             <div class="row w-100 m-auto py-4 justify-content-between align-items-center border border-white border-opacity-25 border-start-0 border-end-0">

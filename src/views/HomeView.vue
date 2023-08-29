@@ -97,6 +97,8 @@ export default {
         });
         watchEffect(() => {
             AppState.activeSurvivor;
+            AppState.activeKiller;
+            AppState.loadout;
         });
         return {
             generateRandomLoadout,
@@ -129,23 +131,30 @@ export default {
   <div class="container-fluid">
     <div class="row m-auto justify-content-around">
       <div class="col-md-3">
-        <div v-if="activeSurvivor" class="row m-auto justify-content-center align-items-center">
+        <div v-if="survivorOnly && activeSurvivor" class="row m-auto justify-content-center align-items-center">
           <h4 class="text-center pt-3">Your Survivor</h4>
           <img :src="activeSurvivor.portrait" alt="">
           <h6 class="text-center mb-3">{{ activeSurvivor.name }}</h6>
+        </div>
+        <div v-if="killerOnly && activeKiller" class="row m-auto justify-content-center align-items-center">
+          <h4 class="text-center pt-3">Your Killer</h4>
+          <img :src="activeKiller.portrait" alt="">
+          <h6 class="text-center mb-3">{{ activeKiller.killer_name }}</h6>
         </div>
       </div>
       <div class="col-md-8 d-flex flex-column justify-content-center">
         <div class="row d-none d-md-flex justify-content-end mb-3">
           <div class="col-md-3 d-flex justify-content-end gap-3">
-            <button @click="generateRandomLoadout('Survivor')" class="btn btn-outline-light">Reroll</button>
+            <button v-if="survivorOnly" @click="generateRandomLoadout('Survivor')" class="btn btn-outline-light">Reroll</button>
+            <button v-if="killerOnly" @click="generateRandomLoadout('Killer')" class="btn btn-outline-light">Reroll</button>
             <button v-if="survivorOnly" @click="killerRollsOnly" class="btn btn-danger">Killer</button>
             <button v-if="killerOnly" @click="survivorRollsOnly" class="btn btn-warning">Survivor</button>
           </div>
         </div>
         <div class="row d-flex d-md-none justify-content-center mb-3">
           <div class="col-md-3 d-flex justify-content-center gap-3">
-            <button @click="generateRandomLoadout('Survivor')" class="btn btn-outline-light">Reroll</button>
+            <button v-if="survivorOnly" @click="generateRandomLoadout('Survivor')" class="btn btn-outline-light">Reroll</button>
+            <button v-if="killerOnly" @click="generateRandomLoadout('Killer')" class="btn btn-outline-light">Reroll</button>
             <button v-if="survivorOnly" @click="killerRollsOnly" class="btn btn-danger">Killer</button>
             <button v-if="killerOnly" @click="survivorRollsOnly" class="btn btn-warning">Survivor</button>
           </div>
