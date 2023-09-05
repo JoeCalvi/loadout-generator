@@ -6,6 +6,7 @@ import { survivorsService } from "../services/SurvivorsService";
 import { killersService } from "../services/KillersService";
 import LoadoutBar from "../components/LoadoutBar.vue";
 import PerkBreakdown from "../components/PerkBreakdown.vue"
+import Dropdown from "../components/Dropdown.vue";
 
 export default {
     data() {
@@ -106,6 +107,7 @@ export default {
         }
 
         onMounted(() => {
+          survivorsService.getAllSurvivors();
           AppState.survivorPerksOnly = true;
           AppState.killerPerksOnly = false;
           getRandomSurvivor();
@@ -124,6 +126,8 @@ export default {
             randomKiller: computed(() => AppState.randomKiller),
             survivorOnly: computed(() => AppState.survivorPerksOnly),
             killerOnly: computed(() => AppState.killerPerksOnly),
+            survivors: computed(() => AppState.survivors),
+            killers: computed(() => AppState.killers),
 
             async survivorRollsOnly () {
               if (AppState.survivorPerksOnly == false) {
@@ -142,7 +146,7 @@ export default {
             }
         };
     },
-    components: { LoadoutBar, PerkBreakdown }
+    components: { LoadoutBar, PerkBreakdown, Dropdown }
 }
 </script>
 
@@ -163,7 +167,8 @@ export default {
       </div>
       <div class="col-md-8 d-flex flex-column justify-content-center">
         <div class="row d-none d-md-flex justify-content-end my-3">
-          <div class="col-md-3 d-flex justify-content-end gap-3">
+          <div class="col-md-6 d-flex justify-content-end gap-3">
+            <Dropdown />
             <button v-if="survivorOnly" @click="generateRandomLoadout('Survivor')" class="btn btn-outline-light">Reroll</button>
             <button v-if="killerOnly" @click="generateRandomLoadout('Killer')" class="btn btn-outline-light">Reroll</button>
             <button v-if="survivorOnly" @click="killerRollsOnly" class="btn btn-danger">Killer</button>
@@ -172,6 +177,7 @@ export default {
         </div>
         <div class="row d-flex d-md-none justify-content-center my-3">
           <div class="col-md-3 d-flex justify-content-center gap-3">
+            <Dropdown />
             <button v-if="survivorOnly" @click="generateRandomLoadout('Survivor')" class="btn btn-outline-light">Reroll</button>
             <button v-if="killerOnly" @click="generateRandomLoadout('Killer')" class="btn btn-outline-light">Reroll</button>
             <button v-if="survivorOnly" @click="killerRollsOnly" class="btn btn-danger">Killer</button>

@@ -190,39 +190,4 @@ export default {
         </div>
       </div>
     </div>
-
-
-    <Modal>
-      <div class="modal-header">
-        <h1 v-if="activeSurvivor != null && activeKiller == null" class="modal-title fs-5" id="activePerkModalLabel">{{ activeSurvivor.name }}</h1>
-      </div>
-      <div class="modal-body">
-        <div class="container-fluid p-3">
-          <div class="row w-100 m-auto">
-            <div class="col-md-4 d-flex align-items-center justify-content-center my-2">
-                <img v-if="activeSurvivor != null && activeKiller == null" :src="activeSurvivor.portrait" :alt="activeSurvivor.name" :title="activeSurvivor.name">
-            </div>
-            <div class="col-md-8 d-flex flex-column align-items-center">
-              <div class="row w-100 m-auto">
-                <div class="col-md-4 d-flex justify-content-center p-3 mb-3">
-                  <div class="perk-icon-background d-flex justify-content-center align-items-center">
-                    <img v-if="activeSurvivor.perk_one" class="perk-icon" :src="activeSurvivor.perk_one.icon" :alt="activeSurvivor.perk_one.name" :title="activeSurvivor.perk_one.name">
-                  </div>
-                </div>
-                <div class="col-md-4 d-flex justify-content-center p-3 mb-3">
-                  <div class="perk-icon-background d-flex justify-content-center align-items-center">
-                    <img v-if="activeSurvivor.perk_two" class="perk-icon" :src="activeSurvivor.perk_two.icon" :alt="activeSurvivor.perk_two.name" :title="activeSurvivor.perk_two.name">
-                  </div>
-                </div>
-                <div class="col-md-4 d-flex justify-content-center p-3 mb-3">
-                  <div class="perk-icon-background d-flex justify-content-center align-items-center">
-                    <img v-if="activeSurvivor.perk_three" class="perk-icon" :src="activeSurvivor.perk_three.icon" :alt="activeSurvivor.perk_three.name" :title="activeSurvivor.perk_three.name">
-                </div>
-              </div>
-            </div>
-          </div>
-          </div>
-        </div>
-      </div>
-    </Modal>
 </template>
