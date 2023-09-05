@@ -57,9 +57,27 @@ export default {
             }
         }
         onMounted(() => {
-            getAllPerks();
+            if (AppState.survivorPerksOnly == true && editable.value.generic == true) {
+                getAllGenericSurvivorPerks();
+            }
+            else if (AppState.killerPerksOnly == true && editable.value.generic == true) {
+                getAllGenericKillerPerks();
+            }
+            else if (AppState.killerPerksOnly == true) {
+                getAllKillerPerks();
+            }
+            else if (AppState.survivorPerksOnly == true) {
+                getAllSurvivorPerks();
+            }
+            else if (AppState.killerPerksOnly == false && AppState.survivorPerksOnly == false && editable.value.generic == true) {
+                getAllGenericPerks();
+            }
+            else if (AppState.killerPerksOnly == false && AppState.survivorPerksOnly == false) {
+                getAllPerks();
+            }
             statusEffectsService.getAllStatusEffects();
         });
+
         watchEffect(() => {
             if (AppState.survivorPerksOnly == true && editable.value.generic == true) {
                 getAllGenericSurvivorPerks();
