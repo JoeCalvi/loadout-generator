@@ -25,7 +25,7 @@ export default {
                         let randomPerkIndex = Math.floor(Math.random() * (indexMax - indexMin + 1) + indexMin);
                         let randomPerk = AppState.perks[randomPerkIndex];
                         if (AppState.loadout.find(p => p.id == randomPerk.id)) {
-                            return;
+                            continue;
                         }
                         else {
                             AppState.loadout.push(randomPerk);
@@ -46,7 +46,7 @@ export default {
                         let randomPerkIndex = Math.floor(Math.random() * (indexMax - indexMin + 1) + indexMin);
                         let randomPerk = AppState.perks[randomPerkIndex];
                         if (AppState.loadout.find(p => p.id == randomPerk.id)) {
-                            return;
+                            continue;
                         }
                         else {
                             AppState.loadout.push(randomPerk);
@@ -90,11 +90,12 @@ export default {
         }
 
         onMounted(() => {
-            AppState.survivorPerksOnly = true;
-            AppState.killerPerksOnly = false;
-            generateRandomLoadout("Survivor");
-            getRandomSurvivor();
+          AppState.survivorPerksOnly = true;
+          AppState.killerPerksOnly = false;
+          getRandomSurvivor();
+          generateRandomLoadout("Survivor");
         });
+
         watchEffect(() => {
             AppState.activeSurvivor;
             AppState.activeKiller;
