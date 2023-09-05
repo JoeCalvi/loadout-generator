@@ -6,9 +6,11 @@ export const AppState = reactive({
   activePerk: null,
   killers: [],
   activeKiller: null,
+  randomKiller: null,
   survivors: [],
   activeSurvivor: null,
-  statusEffects: [], 
+  randomSurvivor: null,
+  statusEffects: [],
   pageNumber: 1,
   survivorPerksOnly: false,
   killerPerksOnly: false

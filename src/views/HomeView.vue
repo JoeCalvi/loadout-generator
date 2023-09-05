@@ -78,13 +78,13 @@ export default {
 
         async function getRandomSurvivor() {
             try {
-                AppState.activeSurvivor = null;
+                AppState.randomSurvivor = null;
                 await survivorsService.getAllSurvivors();
                 const indexMin = 0;
                 const indexMax = AppState.survivors.length - 1;
                 const randomSurvivorIndex = Math.floor(Math.random() * (indexMax - indexMin + 1) + indexMin);
-                AppState.activeSurvivor = AppState.survivors[randomSurvivorIndex];
-                console.log("random survivor:", AppState.activeSurvivor.name);
+                AppState.randomSurvivor = AppState.survivors[randomSurvivorIndex];
+                console.log("random survivor:", AppState.randomSurvivor.name);
             }
             catch (error) {
                 console.error(error);
@@ -93,13 +93,13 @@ export default {
 
         async function getRandomKiller() {
             try {
-              AppState.activeKiller = null;
+              AppState.randomKiller = null;
               await killersService.getAllKillers();
               const indexMin = 0;
               const indexMax = AppState.killers.length - 1;
               const randomKillerIndex = Math.floor(Math.random() * (indexMax - indexMin + 1) + indexMin);
-              AppState.activeKiller = AppState.killers[randomKillerIndex];
-              console.log("random killer:", AppState.activeKiller.killer_name)
+              AppState.randomKiller = AppState.killers[randomKillerIndex];
+              console.log("random killer:", AppState.randomKiller.killer_name)
             } catch (error) {
               console.error(error)
             }
@@ -113,15 +113,15 @@ export default {
         });
 
         watchEffect(() => {
-            AppState.activeSurvivor;
-            AppState.activeKiller;
+            AppState.randomSurvivor;
+            AppState.randomKiller;
             AppState.loadout;
         });
         return {
             generateRandomLoadout,
             loadout: computed(() => AppState.loadout),
-            activeSurvivor: computed(() => AppState.activeSurvivor),
-            activeKiller: computed(() => AppState.activeKiller),
+            randomSurvivor: computed(() => AppState.randomSurvivor),
+            randomKiller: computed(() => AppState.randomKiller),
             survivorOnly: computed(() => AppState.survivorPerksOnly),
             killerOnly: computed(() => AppState.killerPerksOnly),
 
@@ -150,15 +150,15 @@ export default {
   <div class="container-fluid">
     <div class="row m-auto justify-content-around">
       <div class="col-md-3">
-        <div v-if="survivorOnly && activeSurvivor" class="row m-auto justify-content-center align-items-center">
+        <div v-if="survivorOnly && randomSurvivor" class="row m-auto justify-content-center align-items-center">
           <h4 class="text-center pt-3">Your Survivor</h4>
-          <img :src="activeSurvivor.portrait" alt="">
-          <h6 class="text-center mb-3">{{ activeSurvivor.name }}</h6>
+          <img :src="randomSurvivor.portrait" alt="">
+          <h6 class="text-center mb-3">{{ randomSurvivor.name }}</h6>
         </div>
-        <div v-if="killerOnly && activeKiller" class="row m-auto justify-content-center align-items-center">
+        <div v-if="killerOnly && randomKiller" class="row m-auto justify-content-center align-items-center">
           <h4 class="text-center pt-3">Your Killer</h4>
-          <img :src="activeKiller.portrait" alt="">
-          <h6 class="text-center mb-3">{{ activeKiller.killer_name }}</h6>
+          <img :src="randomKiller.portrait" alt="">
+          <h6 class="text-center mb-3">{{ randomKiller.killer_name }}</h6>
         </div>
       </div>
       <div class="col-md-8 d-flex flex-column justify-content-center">

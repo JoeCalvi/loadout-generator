@@ -1,36 +1,42 @@
 <script>
 import { survivorsService } from "../services/SurvivorsService";
 import { killersService } from "../services/KillersService";
+import Modal from "./modal.vue";
+import { computed } from "vue";
+import { AppState } from "../AppState";
 
 export default {
-  props: {
-    loadout: {
-      type: Array,
-      required: true
-    }
-  },
-  data() {
-    async function getSurvivorById(survivorId) {
-      try {
-        await survivorsService.getSurvivorById(survivorId);
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    async function getKillerById(killerId) {
-      try {
-        await killersService.getKillerById(killerId);
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    return {
-      getSurvivorById,
-      getKillerById
-    }
-  }
+    props: {
+        loadout: {
+            type: Array,
+            required: true
+        }
+    },
+    data() {
+        async function getSurvivorById(survivorId) {
+            try {
+                await survivorsService.getSurvivorById(survivorId);
+            }
+            catch (error) {
+                console.error(error);
+            }
+        }
+        async function getKillerById(killerId) {
+            try {
+                await killersService.getKillerById(killerId);
+            }
+            catch (error) {
+                console.error(error);
+            }
+        }
+        return {
+            getSurvivorById,
+            getKillerById,
+            activeSurvivor: computed(() => AppState.activeSurvivor),
+            activeKiller: computed(() => AppState.activeKiller)
+        };
+    },
+    components: { Modal }
 }
 </script>
 
@@ -152,4 +158,27 @@ export default {
         </div>
       </div>
     </div>
+
+
+    <Modal>
+      <div class="modal-header">
+        <h1 v-if="activeSurvivor != null && activeKiller == null" class="modal-title fs-5" id="activePerkModalLabel">{{ activeSurvivor.name }}</h1>
+      </div>
+      <div class="modal-body">
+        <div class="container p-3">
+          <div class="row m-auto">
+            <div class="col-2 d-flex align-items-center justify-content-center">
+              <div class="perk-icon-background d-flex justify-content-center align-items-center m-3">
+                <img v-if="activeSurvivor != null && activeKiller == null" :src="activeSurvivor.portrait" :alt="activeSurvivor.name" :title="activeSurvivor.name">
+              </div>
+            </div>
+            <div class="col-10 d-flex justify-content-center align-items-center">
+              <div class="row m-auto">
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Modal>
 </template>
