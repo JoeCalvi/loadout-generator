@@ -9,7 +9,7 @@ export default {
         survivorOnly: computed(() => AppState.survivorPerksOnly),
         killerOnly: computed(() => AppState.killerPerksOnly),
         survivors: computed(() => AppState.survivors),
-        killers: computed(() => AppState.killers)
+        killers: computed(() => AppState.killers),
     }
   }
 }

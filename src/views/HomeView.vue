@@ -168,7 +168,7 @@ export default {
       <div class="col-md-8 d-flex flex-column justify-content-center">
         <div class="row d-none d-md-flex justify-content-end my-3">
           <div class="col-md-6 d-flex justify-content-end gap-3">
-            <Dropdown />
+            <!-- <Dropdown /> -->
             <button v-if="survivorOnly" @click="generateRandomLoadout('Survivor')" class="btn btn-outline-light">Reroll</button>
             <button v-if="killerOnly" @click="generateRandomLoadout('Killer')" class="btn btn-outline-light">Reroll</button>
             <button v-if="survivorOnly" @click="killerRollsOnly" class="btn btn-danger">Killer</button>
@@ -177,7 +177,7 @@ export default {
         </div>
         <div class="row d-flex d-md-none justify-content-center my-3">
           <div class="col-md-3 d-flex justify-content-center gap-3">
-            <Dropdown />
+            <!-- <Dropdown /> -->
             <button v-if="survivorOnly" @click="generateRandomLoadout('Survivor')" class="btn btn-outline-light">Reroll</button>
             <button v-if="killerOnly" @click="generateRandomLoadout('Killer')" class="btn btn-outline-light">Reroll</button>
             <button v-if="survivorOnly" @click="killerRollsOnly" class="btn btn-danger">Killer</button>
