@@ -34,6 +34,12 @@ export default {
                 <p v-if="loadout[0] && loadout[0].role == 'Killer' && loadout[0].killer"><span class="text-danger">{{ loadout[0].killer.killer_name }}</span> Perk</p>
                 <p v-if="loadout[0] && loadout[0].role == 'Killer' && !loadout[0].killer">General Killer Perk</p>
                 <i v-if="loadout[0]">{{ loadout[0].description }}</i>
+                <div class="row mt-3" v-if="loadout[0] && loadout[0].associated_status_effects.length > 0">
+                  <h6 class="mt-2">Associated Status Effects</h6>
+                  <div v-for="effect in loadout[0].associated_status_effects" class="col-1 p-0 d-flex justify-content-center align-items-center">
+                    <img class="status-effect-icon selectable" :src="effect.icon" :alt="effect.name" :title="effect.name">
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -53,6 +59,12 @@ export default {
                 <p v-if="loadout[1] && loadout[1].role == 'Killer' && loadout[1].killer"><span class="text-danger">{{ loadout[1].killer.killer_name }}</span> Perk</p>
                 <p v-if="loadout[1] && loadout[1].role == 'Killer' && !loadout[1].killer">General Killer Perk</p>
                 <i v-if="loadout[1]">{{ loadout[1].description }}</i>
+                <div class="row mt-3" v-if="loadout[1] && loadout[1].associated_status_effects.length > 0">
+                  <h6 class="mt-2">Associated Status Effects</h6>
+                  <div v-for="effect in loadout[1].associated_status_effects" class="col-1 p-0 d-flex justify-content-center align-items-center">
+                    <img class="status-effect-icon selectable" :src="effect.icon" :alt="effect.name" :title="effect.name">
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -72,6 +84,12 @@ export default {
                 <p v-if="loadout[2] && loadout[2].role == 'Killer' && loadout[2].killer"><span class="text-danger">{{ loadout[2].killer.killer_name }}</span> Perk</p>
                 <p v-if="loadout[2] && loadout[2].role == 'Killer' && !loadout[2].killer">General Killer Perk</p>
                 <i v-if="loadout[2]">{{ loadout[2].description }}</i>
+                <div class="row mt-3" v-if="loadout[2] && loadout[2].associated_status_effects.length > 0">
+                  <h6 class="mt-2">Associated Status Effects</h6>
+                  <div v-for="effect in loadout[2].associated_status_effects" class="col-1 p-0 d-flex justify-content-center align-items-center">
+                    <img class="status-effect-icon selectable" :src="effect.icon" :alt="effect.name" :title="effect.name">
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -91,6 +109,12 @@ export default {
                 <p v-if="loadout[3] && loadout[3].role == 'Killer' && loadout[3].killer"><span class="text-danger">{{ loadout[3].killer.killer_name }}</span> Perk</p>
                 <p v-if="loadout[3] && loadout[3].role == 'Killer' && !loadout[3].killer">General Killer Perk</p>
                 <i v-if="loadout[3]">{{ loadout[3].description }}</i>
+                <div class="row mt-3" v-if="loadout[3] && loadout[3].associated_status_effects.length > 0">
+                  <h6 class="mt-2">Associated Status Effects</h6>
+                  <div v-for="effect in loadout[3].associated_status_effects" class="col-1 p-0 d-flex justify-content-center align-items-center">
+                    <img class="status-effect-icon selectable" :src="effect.icon" :alt="effect.name" :title="effect.name">
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -28,6 +28,14 @@ export default {
                             continue;
                         }
                         else {
+                            if (randomPerk.associated_status_effects.length > 0) {
+                                randomPerk.associated_status_effects.forEach(e => {
+                                  const googleDriveURL = e.icon;
+                                  const fileId = googleDriveURL.slice(32, 65)
+                                  const iconLink = `https://drive.google.com/uc?id=${fileId}`
+                                  e.icon = iconLink
+                              });
+                            }
                             AppState.loadout.push(randomPerk);
                         }
                     }
@@ -49,6 +57,14 @@ export default {
                             continue;
                         }
                         else {
+                            if (randomPerk.associated_status_effects.length > 0) {
+                                randomPerk.associated_status_effects.forEach(e => {
+                                  const googleDriveURL = e.icon;
+                                  const fileId = googleDriveURL.slice(32, 65)
+                                  const iconLink = `https://drive.google.com/uc?id=${fileId}`
+                                  e.icon = iconLink
+                              });
+                            }
                             AppState.loadout.push(randomPerk);
                         }
                     }
@@ -146,7 +162,7 @@ export default {
         </div>
       </div>
       <div class="col-md-8 d-flex flex-column justify-content-center">
-        <div class="row d-none d-md-flex justify-content-end mb-3">
+        <div class="row d-none d-md-flex justify-content-end my-3">
           <div class="col-md-3 d-flex justify-content-end gap-3">
             <button v-if="survivorOnly" @click="generateRandomLoadout('Survivor')" class="btn btn-outline-light">Reroll</button>
             <button v-if="killerOnly" @click="generateRandomLoadout('Killer')" class="btn btn-outline-light">Reroll</button>
@@ -154,7 +170,7 @@ export default {
             <button v-if="killerOnly" @click="survivorRollsOnly" class="btn btn-warning">Survivor</button>
           </div>
         </div>
-        <div class="row d-flex d-md-none justify-content-center mb-3">
+        <div class="row d-flex d-md-none justify-content-center my-3">
           <div class="col-md-3 d-flex justify-content-center gap-3">
             <button v-if="survivorOnly" @click="generateRandomLoadout('Survivor')" class="btn btn-outline-light">Reroll</button>
             <button v-if="killerOnly" @click="generateRandomLoadout('Killer')" class="btn btn-outline-light">Reroll</button>
