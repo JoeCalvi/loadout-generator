@@ -3,166 +3,175 @@ import { computed, onMounted, watchEffect, ref } from "vue";
 import { AppState } from "../AppState";
 import { perksService } from "../services/PerksService";
 import { statusEffectsService } from "../services/StatusEffectsService";
+import Modal from "../components/Modal.vue";
 
 export default {
-  data() {  
-    const editable = ref({ generic: false });
-
-    async function getAllPerks () {
-      try {
-        await perksService.getAllPerks();
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    async function getAllSurvivorPerks () {
-      try {
-        await perksService.getAllSurvivorPerks();
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    async function getAllKillerPerks () {
-      try {
-        await perksService.getAllKillerPerks();
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    async function getAllGenericPerks () {
-      try {
-        await perksService.getAllGenericPerks();
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    async function getAllGenericSurvivorPerks () {
-      try {
-        await perksService.getAllGenericSurvivorPerks();
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    async function getAllGenericKillerPerks () {
-      try {
-        await perksService.getAllGenericKillerPerks();
-      } catch (error) {
-        console.error(error)
-      }
-    }
- 
-    onMounted(() => {
-      getAllPerks();
-      statusEffectsService.getAllStatusEffects();
-    })
-
-    watchEffect(() => {
-      if (AppState.survivorPerksOnly == true && editable.value.generic == true) {
-        getAllGenericSurvivorPerks();
-      } else if (AppState.killerPerksOnly == true && editable.value.generic == true) {
-        getAllGenericKillerPerks();
-      } else if (AppState.killerPerksOnly == true) {
-        getAllKillerPerks();
-      } else if (AppState.survivorPerksOnly == true) {
-        getAllSurvivorPerks();
-      } else if (AppState.killerPerksOnly == false && AppState.survivorPerksOnly == false && editable.value.generic == true) {
-        getAllGenericPerks();
-      } else if (AppState.killerPerksOnly == false && AppState.survivorPerksOnly == false) {
-        getAllPerks();
-      }
-    })
-
-    return {
-      perks: computed(() => AppState.perks),
-      activePerk: computed(() => AppState.activePerk),
-      pageNumber: computed(() => AppState.pageNumber),
-      survivorPerksOnly: computed(() => AppState.survivorPerksOnly),
-      killerPerksOnly: computed(() => AppState.killerPerksOnly),
-      editable,
-      getAllPerks,
-      getAllKillerPerks,
-      getAllSurvivorPerks,
-
-      previousPage () {
-        if (AppState.survivorPerksOnly == false && AppState.killerPerksOnly == false && editable.value.generic == false) {
-          if (AppState.pageNumber == 1) {
-            AppState.pageNumber = 9;
-          } else if (AppState.pageNumber > 1 ) {
-            AppState.pageNumber--;
-          }
-        } else if (AppState.survivorPerksOnly == true && AppState.killerPerksOnly == false && editable.value.generic == false) {
-          if (AppState.pageNumber == 1) {
-            AppState.pageNumber = 5;
-          } else if (AppState.pageNumber > 1 ) {
-            AppState.pageNumber--;
-          }
-      } else if (AppState.survivorPerksOnly == false && AppState.killerPerksOnly == true && editable.value.generic == false) {
-          if (AppState.pageNumber == 1) {
-            AppState.pageNumber = 4;
-          } else if (AppState.pageNumber > 1 ) {
-            AppState.pageNumber--;
-          }
-      }
-      const main = document.getElementById("main")
-      main.scrollTop = 0
-      },
-
-      nextPage () {
-          if (AppState.survivorPerksOnly == false && AppState.killerPerksOnly == false && editable.value.generic == false) {
-            if (AppState.pageNumber == 9) {
-              AppState.pageNumber = 1;
-            } else if (AppState.pageNumber < 9) {
-              AppState.pageNumber++;
+    data() {
+        const editable = ref({ generic: false });
+        async function getAllPerks() {
+            try {
+                await perksService.getAllPerks();
             }
-          } else if (AppState.survivorPerksOnly == true && AppState.killerPerksOnly == false && editable.value.generic == false) {
-            if (AppState.pageNumber == 5) {
-              AppState.pageNumber = 1;
-            } else if (AppState.pageNumber < 5 ) {
-              AppState.pageNumber++;
-            }
-        } else if (AppState.survivorPerksOnly == false && AppState.killerPerksOnly == true && editable.value.generic == false) {
-            if (AppState.pageNumber == 4) {
-              AppState.pageNumber = 1;
-            } else if (AppState.pageNumber < 4 ) {
-              AppState.pageNumber++;
+            catch (error) {
+                console.error(error);
             }
         }
-        const main = document.getElementById("main")
-        main.scrollTop = 0
-      },
-
-      survivorOnly () {
-        AppState.survivorPerksOnly = true;
-        AppState.killerPerksOnly = false;
-        AppState.pageNumber = 1;
-      },
-
-      killerOnly () {
-        AppState.killerPerksOnly = true;
-        AppState.survivorPerksOnly = false;
-        AppState.pageNumber = 1;
-      },
-
-      allPerks () {
-        AppState.survivorPerksOnly = false;
-        AppState.killerPerksOnly = false;
-        AppState.pageNumber = 1;
-      },
-
-      async setActivePerk (perkId) {
-        try {
-          await perksService.getPerkById(perkId);
-        } catch (error) {
-          console.error(error)
+        async function getAllSurvivorPerks() {
+            try {
+                await perksService.getAllSurvivorPerks();
+            }
+            catch (error) {
+                console.error(error);
+            }
         }
-      }
-    }
-  }
+        async function getAllKillerPerks() {
+            try {
+                await perksService.getAllKillerPerks();
+            }
+            catch (error) {
+                console.error(error);
+            }
+        }
+        async function getAllGenericPerks() {
+            try {
+                await perksService.getAllGenericPerks();
+            }
+            catch (error) {
+                console.error(error);
+            }
+        }
+        async function getAllGenericSurvivorPerks() {
+            try {
+                await perksService.getAllGenericSurvivorPerks();
+            }
+            catch (error) {
+                console.error(error);
+            }
+        }
+        async function getAllGenericKillerPerks() {
+            try {
+                await perksService.getAllGenericKillerPerks();
+            }
+            catch (error) {
+                console.error(error);
+            }
+        }
+        onMounted(() => {
+            getAllPerks();
+            statusEffectsService.getAllStatusEffects();
+        });
+        watchEffect(() => {
+            if (AppState.survivorPerksOnly == true && editable.value.generic == true) {
+                getAllGenericSurvivorPerks();
+            }
+            else if (AppState.killerPerksOnly == true && editable.value.generic == true) {
+                getAllGenericKillerPerks();
+            }
+            else if (AppState.killerPerksOnly == true) {
+                getAllKillerPerks();
+            }
+            else if (AppState.survivorPerksOnly == true) {
+                getAllSurvivorPerks();
+            }
+            else if (AppState.killerPerksOnly == false && AppState.survivorPerksOnly == false && editable.value.generic == true) {
+                getAllGenericPerks();
+            }
+            else if (AppState.killerPerksOnly == false && AppState.survivorPerksOnly == false) {
+                getAllPerks();
+            }
+        });
+        return {
+            perks: computed(() => AppState.perks),
+            activePerk: computed(() => AppState.activePerk),
+            pageNumber: computed(() => AppState.pageNumber),
+            survivorPerksOnly: computed(() => AppState.survivorPerksOnly),
+            killerPerksOnly: computed(() => AppState.killerPerksOnly),
+            editable,
+            getAllPerks,
+            getAllKillerPerks,
+            getAllSurvivorPerks,
+            previousPage() {
+                if (AppState.survivorPerksOnly == false && AppState.killerPerksOnly == false && editable.value.generic == false) {
+                    if (AppState.pageNumber == 1) {
+                        AppState.pageNumber = 9;
+                    }
+                    else if (AppState.pageNumber > 1) {
+                        AppState.pageNumber--;
+                    }
+                }
+                else if (AppState.survivorPerksOnly == true && AppState.killerPerksOnly == false && editable.value.generic == false) {
+                    if (AppState.pageNumber == 1) {
+                        AppState.pageNumber = 5;
+                    }
+                    else if (AppState.pageNumber > 1) {
+                        AppState.pageNumber--;
+                    }
+                }
+                else if (AppState.survivorPerksOnly == false && AppState.killerPerksOnly == true && editable.value.generic == false) {
+                    if (AppState.pageNumber == 1) {
+                        AppState.pageNumber = 4;
+                    }
+                    else if (AppState.pageNumber > 1) {
+                        AppState.pageNumber--;
+                    }
+                }
+                const main = document.getElementById("main");
+                main.scrollTop = 0;
+            },
+            nextPage() {
+                if (AppState.survivorPerksOnly == false && AppState.killerPerksOnly == false && editable.value.generic == false) {
+                    if (AppState.pageNumber == 9) {
+                        AppState.pageNumber = 1;
+                    }
+                    else if (AppState.pageNumber < 9) {
+                        AppState.pageNumber++;
+                    }
+                }
+                else if (AppState.survivorPerksOnly == true && AppState.killerPerksOnly == false && editable.value.generic == false) {
+                    if (AppState.pageNumber == 5) {
+                        AppState.pageNumber = 1;
+                    }
+                    else if (AppState.pageNumber < 5) {
+                        AppState.pageNumber++;
+                    }
+                }
+                else if (AppState.survivorPerksOnly == false && AppState.killerPerksOnly == true && editable.value.generic == false) {
+                    if (AppState.pageNumber == 4) {
+                        AppState.pageNumber = 1;
+                    }
+                    else if (AppState.pageNumber < 4) {
+                        AppState.pageNumber++;
+                    }
+                }
+                const main = document.getElementById("main");
+                main.scrollTop = 0;
+            },
+            survivorOnly() {
+                AppState.survivorPerksOnly = true;
+                AppState.killerPerksOnly = false;
+                AppState.pageNumber = 1;
+            },
+            killerOnly() {
+                AppState.killerPerksOnly = true;
+                AppState.survivorPerksOnly = false;
+                AppState.pageNumber = 1;
+            },
+            allPerks() {
+                AppState.survivorPerksOnly = false;
+                AppState.killerPerksOnly = false;
+                AppState.pageNumber = 1;
+            },
+            async setActivePerk(perkId) {
+                try {
+                    await perksService.getPerkById(perkId);
+                }
+                catch (error) {
+                    console.error(error);
+                }
+            }
+        };
+    },
+    components: { Modal }
 }
 </script>
 
@@ -216,10 +225,8 @@ export default {
 
 
   <!-- Modal -->
-<div class="modal fade" id="activePerkModal" tabindex="-1" aria-labelledby="activePerkModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content bg-dark border-white" v-if="activePerk != null">
-      <div class="modal-header">
+<Modal v-if="activePerk != null">
+        <div class="modal-header">
         <h1  class="modal-title fs-5" id="activePerkModalLabel">{{ activePerk.name }}</h1>
       </div>
       <div class="modal-body">
@@ -258,12 +265,7 @@ export default {
           </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+</Modal>
 </template>
 
 <style scoped>
