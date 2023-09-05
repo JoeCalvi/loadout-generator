@@ -1,6 +1,8 @@
 header {
   width: 100vw;
   background-color: darkred;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Urbanist', sans-serif;
 }
 
 main {
@@ -10,6 +12,9 @@ main {
   scroll-behavior: smooth;
   background-color: black;
   color: white;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Urbanist', sans-serif;
+  letter-spacing: 1px;
 }
 
 footer {

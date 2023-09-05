@@ -8,22 +8,22 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <router-link class="nav-link" :to="{ name: 'home' }">
-                <span>Home</span>
+                <span class="text-light" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">Home</span>
               </router-link>
             </li>
             <li class="nav-item">
               <router-link class="nav-link" :to="{ name: 'perks' }">
-                <span>Perks</span>
+                <span class="text-light" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">Perks</span>
               </router-link>
             </li>
             <li class="nav-item">
               <router-link class="nav-link" :to="{ name: 'survivors' }">
-                <span>Survivors</span>
+                <span class="text-light" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">Survivors</span>
               </router-link>
             </li>
             <li class="nav-item">
               <router-link class="nav-link" :to="{ name: 'killers' }">
-                <span>Killers</span>
+                <span class="text-light" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">Killers</span>
               </router-link>
             </li>
           </ul>
