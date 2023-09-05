@@ -274,7 +274,10 @@ export default {
                 <div class="col-12" v-if="activePerk.associated_status_effects.length > 0">
                   <h6 class="mt-2">Associated Status Effects</h6>
                   <div class="row m-auto">
-                    <div v-for="effect in activePerk.associated_status_effects" class="col-1 p-0 d-flex justify-content-center align-items-center">
+                    <div v-for="effect in activePerk.associated_status_effects" class="col-1 p-0 d-flex d-md-none mx-3 justify-content-center align-items-center">
+                      <img class="status-effect-icon selectable" :src="effect.icon" :alt="effect.name" :title="effect.name" data-bs-toggle="collapse" :data-bs-target="'#'+ effect._id">
+                    </div>
+                    <div v-for="effect in activePerk.associated_status_effects" class="col-1 p-0 d-none d-md-flex justify-content-center align-items-center">
                       <img class="status-effect-icon selectable" :src="effect.icon" :alt="effect.name" :title="effect.name" data-bs-toggle="collapse" :data-bs-target="'#'+ effect._id">
                     </div>
                     <div v-for="effect in activePerk.associated_status_effects" class="collapse mt-3" :id="effect._id">
