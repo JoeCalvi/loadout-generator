@@ -1,4 +1,7 @@
 <script>
+import { survivorsService } from "../services/SurvivorsService";
+import { killersService } from "../services/KillersService";
+
 export default {
   props: {
     loadout: {
@@ -7,9 +10,25 @@ export default {
     }
   },
   data() {
+    async function getSurvivorById(survivorId) {
+      try {
+        await survivorsService.getSurvivorById(survivorId);
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    async function getKillerById(killerId) {
+      try {
+        await killersService.getKillerById(killerId);
+      } catch (error) {
+        console.error(error)
+      }
+    }
 
     return {
-
+      getSurvivorById,
+      getKillerById
     }
   }
 }
@@ -29,9 +48,9 @@ export default {
               </div>
               <div class="col-md-9 mb-3 d-flex flex-column justify-content-center">
                 <h5 v-if="loadout[0]" class="mb-0">{{ loadout[0].name }}</h5>
-                <p v-if="loadout[0] && loadout[0].role == 'Survivor' && loadout[0].survivor"><span class="text-danger">{{ loadout[0].survivor.name }}</span> Perk</p>
+                <p v-if="loadout[0] && loadout[0].role == 'Survivor' && loadout[0].survivor"><span class="text-danger selectable" @click="getSurvivorById(`${loadout[0].survivor_id}`)">{{ loadout[0].survivor.name }}</span> Perk</p>
                 <p v-if="loadout[0] && loadout[0].role == 'Survivor' && !loadout[0].survivor">General Survivor Perk</p>
-                <p v-if="loadout[0] && loadout[0].role == 'Killer' && loadout[0].killer"><span class="text-danger">{{ loadout[0].killer.killer_name }}</span> Perk</p>
+                <p v-if="loadout[0] && loadout[0].role == 'Killer' && loadout[0].killer"><span class="text-danger selectable" @click="getKillerById(`${loadout[0].killer_id}`)">{{ loadout[0].killer.killer_name }}</span> Perk</p>
                 <p v-if="loadout[0] && loadout[0].role == 'Killer' && !loadout[0].killer">General Killer Perk</p>
                 <i v-if="loadout[0]">{{ loadout[0].description }}</i>
                 <div class="row mt-3" v-if="loadout[0] && loadout[0].associated_status_effects.length > 0">
@@ -57,9 +76,9 @@ export default {
               </div>
               <div class="col-md-9 mb-3 d-flex flex-column justify-content-center">
                 <h5 v-if="loadout[1]" class="mb-0">{{ loadout[1].name }}</h5>
-                <p v-if="loadout[1] && loadout[0].role == 'Survivor' && loadout[1].survivor"><span class="text-danger">{{ loadout[1].survivor.name }}</span> Perk</p>
+                <p v-if="loadout[1] && loadout[0].role == 'Survivor' && loadout[1].survivor"><span class="text-danger selectable" @click="getSurvivorById(`${loadout[1].survivor_id}`)">{{ loadout[1].survivor.name }}</span> Perk</p>
                 <p v-if="loadout[1] && loadout[0].role == 'Survivor' && !loadout[1].survivor">General Survivor Perk</p>
-                <p v-if="loadout[1] && loadout[1].role == 'Killer' && loadout[1].killer"><span class="text-danger">{{ loadout[1].killer.killer_name }}</span> Perk</p>
+                <p v-if="loadout[1] && loadout[1].role == 'Killer' && loadout[1].killer"><span class="text-danger selectable" @click="getKillerById(`${loadout[1].killer_id}`)">{{ loadout[1].killer.killer_name }}</span> Perk</p>
                 <p v-if="loadout[1] && loadout[1].role == 'Killer' && !loadout[1].killer">General Killer Perk</p>
                 <i v-if="loadout[1]">{{ loadout[1].description }}</i>
                 <div class="row mt-3" v-if="loadout[1] && loadout[1].associated_status_effects.length > 0">
@@ -85,9 +104,9 @@ export default {
               </div>
               <div class="col-md-9 mb-3 d-flex flex-column justify-content-center">
                 <h5 v-if="loadout[2]" class="mb-0">{{ loadout[2].name }}</h5>
-                <p v-if="loadout[2] && loadout[0].role == 'Survivor' && loadout[2].survivor"><span class="text-danger">{{ loadout[2].survivor.name }}</span> Perk</p>
+                <p v-if="loadout[2] && loadout[0].role == 'Survivor' && loadout[2].survivor"><span class="text-danger selectable" @click="getSurvivorById(`${loadout[2].survivor_id}`)">{{ loadout[2].survivor.name }}</span> Perk</p>
                 <p v-if="loadout[2] && loadout[0].role == 'Survivor' && !loadout[2].survivor">General Survivor Perk</p>
-                <p v-if="loadout[2] && loadout[2].role == 'Killer' && loadout[2].killer"><span class="text-danger">{{ loadout[2].killer.killer_name }}</span> Perk</p>
+                <p v-if="loadout[2] && loadout[2].role == 'Killer' && loadout[2].killer"><span class="text-danger selectable" @click="getKillerById(`${loadout[2].killer_id}`)">{{ loadout[2].killer.killer_name }}</span> Perk</p>
                 <p v-if="loadout[2] && loadout[2].role == 'Killer' && !loadout[2].killer">General Killer Perk</p>
                 <i v-if="loadout[2]">{{ loadout[2].description }}</i>
                 <div class="row mt-3" v-if="loadout[2] && loadout[2].associated_status_effects.length > 0">
@@ -113,9 +132,9 @@ export default {
               </div>
               <div class="col-md-9 mb-3 d-flex flex-column justify-content-center">
                 <h5 v-if="loadout[3]" class="mb-0">{{ loadout[3].name }}</h5>
-                <p v-if="loadout[3] && loadout[0].role == 'Survivor' && loadout[3].survivor"><span class="text-danger">{{ loadout[3].survivor.name }}</span> Perk</p>
+                <p v-if="loadout[3] && loadout[0].role == 'Survivor' && loadout[3].survivor"><span class="text-danger selectable" @click="getSurvivorById(`${loadout[3].survivor_id}`)">{{ loadout[3].survivor.name }}</span> Perk</p>
                 <p v-if="loadout[3] && loadout[0].role == 'Survivor' && !loadout[3].survivor">General Survivor Perk</p>
-                <p v-if="loadout[3] && loadout[3].role == 'Killer' && loadout[3].killer"><span class="text-danger">{{ loadout[3].killer.killer_name }}</span> Perk</p>
+                <p v-if="loadout[3] && loadout[3].role == 'Killer' && loadout[3].killer"><span class="text-danger selectable" @click="getKillerById(`${loadout[3].killer_id}`)">{{ loadout[3].killer.killer_name }}</span> Perk</p>
                 <p v-if="loadout[3] && loadout[3].role == 'Killer' && !loadout[3].killer">General Killer Perk</p>
                 <i v-if="loadout[3]">{{ loadout[3].description }}</i>
                 <div class="row mt-3" v-if="loadout[3] && loadout[3].associated_status_effects.length > 0">
