@@ -240,8 +240,16 @@ export default {
             <div class="col-10 d-flex justify-content-center align-items-center">
               <div class="row m-auto">
                 <h6 v-if="activePerk.generic == true">Generic {{ activePerk.role }} Perk</h6>
-                <h6 v-if="activePerk.role == 'Survivor' && activePerk.generic == false">{{ activePerk.survivor.name }} Perk</h6>
-                <h6 v-if="activePerk.role == 'Killer' && activePerk.generic == false">{{ activePerk.killer.killer_name }} Perk</h6>
+                <h6 v-if="activePerk.role == 'Survivor' && activePerk.generic == false">
+                  <router-link class="text-danger text-decoration-none" :to="{ name: 'survivor', params: { survivorId: activePerk.survivor_id }}">
+                    <span class="selectable" data-bs-dismiss="modal">{{ activePerk.survivor.name }}</span>
+                  </router-link>
+                   Perk</h6>
+                <h6 v-if="activePerk.role == 'Killer' && activePerk.generic == false">
+                  <router-link class="text-danger text-decoration-none" :to="{ name: 'killer', params: { killerId: activePerk.killer_id }}">
+                    <span class="selectable" data-bs-dismiss="modal">{{ activePerk.killer.killer_name }}</span>
+                  </router-link>
+                   Perk</h6>
                 <i class="px-4">
                   {{ activePerk.description }}
                 </i>
