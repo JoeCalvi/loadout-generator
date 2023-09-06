@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import PerksView from '../views/PerksView.vue'
 import SurvivorsView from '../views/SurvivorsView.vue'
@@ -7,8 +7,7 @@ import KillersView from '../views/KillersView.vue'
 import KillerView from '../views/KillerView.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  mode: 'hash',
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
