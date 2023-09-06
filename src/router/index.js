@@ -8,6 +8,7 @@ import KillerView from '../views/KillerView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  mode: 'hash',
   routes: [
     {
       path: '/',
