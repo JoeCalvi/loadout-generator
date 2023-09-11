@@ -278,7 +278,7 @@ export default {
         </div>
     </div>
     <div v-if="editable.generic == false" class="row m-auto mb-3 justify-content-center align-items-center">
-      <div class="col-9 d-flex justify-content-evenly pe-3">
+      <div class="col-6 d-flex justify-content-evenly pe-3">
         <div>
           <button @click="previousPage()" class="btn btn-outline-light">
             <span class="mdi mdi-chevron-left"></span>
