@@ -17,9 +17,9 @@ export default {
                 console.error(error);
             }
         }
-        async function getAllSurvivorPerks() {
+        async function getPageFromSurvivorPerks() {
             try {
-                await perksService.getAllSurvivorPerks();
+                await perksService.getPageFromSurvivorPerks(AppState.pageNumber);
             }
             catch (error) {
                 console.error(error);
@@ -82,7 +82,7 @@ export default {
                   AppState.pages.push(pageNumber)
                 }
                 console.log("amount of pages:", AppState.pages.length)
-                getAllSurvivorPerks();
+                getPageFromSurvivorPerks();
             }
             else if (AppState.killerPerksOnly == false && AppState.survivorPerksOnly == false && editable.value.generic == true) {
                 getAllGenericPerks();
@@ -125,7 +125,7 @@ export default {
                   AppState.pages.push(pageNumber)
                 }
                 console.log("pages:", AppState.pages)
-                getAllSurvivorPerks();
+                getPageFromSurvivorPerks();
             }
             else if (AppState.killerPerksOnly == false && AppState.survivorPerksOnly == false && editable.value.generic == true) {
                 getAllGenericPerks();
@@ -151,7 +151,7 @@ export default {
             editable,
             getPageFromAllPerks,
             getAllKillerPerks,
-            getAllSurvivorPerks,
+            getPageFromSurvivorPerks,
 
             setPage(pageNumber) {
                 AppState.pageNumber = pageNumber;

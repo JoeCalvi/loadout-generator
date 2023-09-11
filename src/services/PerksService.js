@@ -15,29 +15,11 @@ class PerksService {
     }
   }
 
-  async getAllSurvivorPerks() {
+  async getPageFromSurvivorPerks(pageNumber) {
     try {
-      if (AppState.pageNumber == 1) {
-        const res = await api.get('perks/survivor?page=1');
+        const res = await api.get(`perks/survivor?page=${pageNumber}`);
         AppState.perks = res.data.perks.map(p => new Perk(p));
         // console.log(AppState.perks)
-      } else if (AppState.pageNumber == 2) {
-        const res = await api.get('perks/survivor?page=2');
-        AppState.perks = res.data.perks.map(p => new Perk(p));
-        // console.log(AppState.perks)
-      } else if (AppState.pageNumber == 3) {
-        const res = await api.get('perks/survivor?page=3');
-        AppState.perks = res.data.perks.map(p => new Perk(p));
-        // console.log(AppState.perks)
-      } else if (AppState.pageNumber == 4) {
-        const res = await api.get('perks/survivor?page=4');
-        AppState.perks = res.data.perks.map(p => new Perk(p));
-        // console.log(AppState.perks)
-      } else if (AppState.pageNumber == 5) {
-        const res = await api.get('perks/survivor?page=5');
-        AppState.perks = res.data.perks.map(p => new Perk(p));
-        // console.log(AppState.perks)
-      }
     } catch (error) {
       console.error(error)
     }
