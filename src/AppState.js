@@ -12,6 +12,9 @@ export const AppState = reactive({
   randomSurvivor: null,
   statusEffects: [],
   pageNumber: 1,
+  pages: [],
+  maxPageNumber: null,
+  minPageNumber: 1,
   survivorPerksOnly: false,
   killerPerksOnly: false
 })
