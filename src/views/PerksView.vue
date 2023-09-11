@@ -71,7 +71,7 @@ export default {
                   let pageNumber = i + 1;
                   AppState.pages.push(pageNumber)
                 }
-                console.log("amount of pages:", AppState.pages.length)
+                // console.log("amount of pages:", AppState.pages.length)
                 getPageFromKillerPerks();
             }
             else if (AppState.survivorPerksOnly == true) {
@@ -81,7 +81,7 @@ export default {
                   let pageNumber = i + 1;
                   AppState.pages.push(pageNumber)
                 }
-                console.log("amount of pages:", AppState.pages.length)
+                // console.log("amount of pages:", AppState.pages.length)
                 getPageFromSurvivorPerks();
             }
             else if (AppState.killerPerksOnly == false && AppState.survivorPerksOnly == false && editable.value.generic == true) {
@@ -94,7 +94,7 @@ export default {
                   let pageNumber = i + 1;
                   AppState.pages.push(pageNumber)
                 }
-                console.log("amount of pages:", AppState.pages.length)
+                // console.log("amount of pages:", AppState.pages.length)
                 getPageFromAllPerks();
             }
             statusEffectsService.getAllStatusEffects();
@@ -114,7 +114,7 @@ export default {
                   let pageNumber = i + 1;
                   AppState.pages.push(pageNumber)
                 }
-                console.log("pages:", AppState.pages)
+                // console.log("pages:", AppState.pages)
                 getPageFromKillerPerks();
             }
             else if (AppState.survivorPerksOnly == true) {
@@ -124,7 +124,7 @@ export default {
                   let pageNumber = i + 1;
                   AppState.pages.push(pageNumber)
                 }
-                console.log("pages:", AppState.pages)
+                // console.log("pages:", AppState.pages)
                 getPageFromSurvivorPerks();
             }
             else if (AppState.killerPerksOnly == false && AppState.survivorPerksOnly == false && editable.value.generic == true) {
@@ -137,7 +137,7 @@ export default {
                   let pageNumber = i + 1;
                   AppState.pages.push(pageNumber)
                 }
-                console.log("pages:", AppState.pages)
+                // console.log("pages:", AppState.pages)
                 getPageFromAllPerks();
             }
         });
@@ -155,7 +155,7 @@ export default {
 
             setPage(pageNumber) {
                 AppState.pageNumber = pageNumber;
-                console.log("page number:", AppState.pageNumber)
+                // console.log("page number:", AppState.pageNumber)
             },
 
             previousPage() {
