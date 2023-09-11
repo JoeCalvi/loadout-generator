@@ -7,7 +7,7 @@ class KillersService {
     try {
       const res = await api.get('killers')
       AppState.killers = res.data.map(k => new Killer(k));
-      console.log(AppState.killers);
+      // console.log(AppState.killers);
     } catch (error) {
       console.error(error);
     }

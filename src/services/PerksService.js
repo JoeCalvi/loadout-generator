@@ -1,9 +1,6 @@
 import { api } from "../Axios";
 import { AppState } from "../AppState";
 import { Perk } from "../models/Perk";
-import { StatusEffect } from "../models/StatusEffect";
-import { statusEffectsService } from "./StatusEffectsService";
-
 class PerksService {
   async getPageFromAllPerks (pageNumber) {
     try {
@@ -25,25 +22,42 @@ class PerksService {
     }
   }
 
-  async getAllKillerPerks() {
+  async getPageFromKillerPerks(pageNumber) {
     try {
-      if (AppState.pageNumber == 1) {
-        const res = await api.get('perks/killer?page=1');
+        const res = await api.get(`perks/killer?page=${pageNumber}`);
         AppState.perks = res.data.perks.map(p => new Perk(p));
         // console.log(AppState.perks)
-      } else if (AppState.pageNumber == 2) {
-        const res = await api.get('perks/killer?page=2');
-        AppState.perks = res.data.perks.map(p => new Perk(p));
-        // console.log(AppState.perks)
-      } else if (AppState.pageNumber == 3) {
-        const res = await api.get('perks/killer?page=3');
-        AppState.perks = res.data.perks.map(p => new Perk(p));
-        // console.log(AppState.perks)
-      } else if (AppState.pageNumber == 4) {
-        const res = await api.get('perks/killer?page=4');
-        AppState.perks = res.data.perks.map(p => new Perk(p));
-        // console.log(AppState.perks)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  async getAllPerks(role) {
+    try {
+      AppState.perks = [];
+      AppState.pages = [];
+
+      if (role == "Survivor") {
+        AppState.pages = [1, 2, 3, 4, 5]
+        for (let i = 0; i < AppState.pages.length; i++) {
+          const res = await api.get(`perks/survivor?page=${AppState.pages[i]}`);
+          const perks = res.data.perks.map(p => new Perk(p))
+          for (let j = 0; j < perks.length; j++) {
+            AppState.perks.push(perks[j])
+          }
+        }
+      } else if (role == "Killer") {
+        AppState.pages = [1, 2, 3, 4]
+        for (let i = 0; i < AppState.pages.length; i++) {
+          const res = await api.get(`perks/killer?page=${AppState.pages[i]}`);
+          const perks = res.data.perks.map(p => new Perk(p))
+          for (let j = 0; j < perks.length; j++) {
+            AppState.perks.push(perks[j])
+          }
+        }
       }
+
+      console.log("ALL PERKS:", AppState.perks);
     } catch (error) {
       console.error(error)
     }

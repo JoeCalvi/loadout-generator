@@ -4,6 +4,7 @@ import { AppState } from "../AppState";
 import { perksService } from "../services/PerksService";
 import { survivorsService } from "../services/SurvivorsService";
 import { killersService } from "../services/KillersService";
+import { statusEffectsService } from "../services/StatusEffectsService";
 import LoadoutBar from "../components/LoadoutBar.vue";
 import PerkBreakdown from "../components/PerkBreakdown.vue"
 import Dropdown from "../components/Dropdown.vue";
@@ -16,11 +17,6 @@ export default {
                 if (role == "Survivor") {
                     await getRandomSurvivor();
                     for (let i = 0; AppState.loadout.length < 4; i++) {
-                        const pageMin = 1;
-                        const pageMax = 5;
-                        const randomPageNumber = Math.floor(Math.random() * (pageMax - pageMin + 1) + pageMin);
-                        AppState.pageNumber = randomPageNumber;
-                        await perksService.getAllSurvivorPerks();
                         const indexMin = 0;
                         const indexMax = AppState.perks.length - 1;
                         let randomPerkIndex = Math.floor(Math.random() * (indexMax - indexMin + 1) + indexMin);
@@ -30,12 +26,10 @@ export default {
                         }
                         else {
                             if (randomPerk.associated_status_effects.length > 0) {
-                                randomPerk.associated_status_effects.forEach(e => {
-                                  const googleDriveURL = e.icon;
-                                  const fileId = googleDriveURL.slice(32, 65)
-                                  const iconLink = `https://drive.google.com/uc?id=${fileId}`
-                                  e.icon = iconLink
-                              });
+                              for (let j = 0; j < randomPerk.associated_status_effects.length; j++) {
+                                const statusEffect = AppState.statusEffects.find(e => e.id == randomPerk.associated_status_effects[j]._id);
+                                randomPerk.associated_status_effects[j].icon = statusEffect.icon;
+                              }
                             }
                             AppState.loadout.push(randomPerk);
                         }
@@ -45,11 +39,6 @@ export default {
                 if (role == "Killer") {
                     await getRandomKiller();
                     for (let i = 0; AppState.loadout.length < 4; i++) {
-                        const pageMin = 1;
-                        const pageMax = 4;
-                        const randomPageNumber = Math.floor(Math.random() * (pageMax - pageMin + 1) + pageMin);
-                        AppState.pageNumber = randomPageNumber;
-                        await perksService.getAllKillerPerks();
                         const indexMin = 0;
                         const indexMax = AppState.perks.length - 1;
                         let randomPerkIndex = Math.floor(Math.random() * (indexMax - indexMin + 1) + indexMin);
@@ -59,17 +48,15 @@ export default {
                         }
                         else {
                             if (randomPerk.associated_status_effects.length > 0) {
-                                randomPerk.associated_status_effects.forEach(e => {
-                                  const googleDriveURL = e.icon;
-                                  const fileId = googleDriveURL.slice(32, 65)
-                                  const iconLink = `https://drive.google.com/uc?id=${fileId}`
-                                  e.icon = iconLink
-                              });
+                              for (let j = 0; j < randomPerk.associated_status_effects.length; j++) {
+                                const statusEffect = AppState.statusEffects.find(e => e.id == randomPerk.associated_status_effects[j]._id);
+                                randomPerk.associated_status_effects[j].icon = statusEffect.icon;
+                              }
                             }
                             AppState.loadout.push(randomPerk);
                         }
                     }
-                    console.log("loadout size:", AppState.loadout.length, "loadout:", AppState.loadout);
+                    // console.log("loadout size:", AppState.loadout.length, "loadout:", AppState.loadout);
                 }
             }
             catch (error) {
@@ -85,7 +72,7 @@ export default {
                 const indexMax = AppState.survivors.length - 1;
                 const randomSurvivorIndex = Math.floor(Math.random() * (indexMax - indexMin + 1) + indexMin);
                 AppState.randomSurvivor = AppState.survivors[randomSurvivorIndex];
-                console.log("random survivor:", AppState.randomSurvivor.name);
+                // console.log("random survivor:", AppState.randomSurvivor.name);
             }
             catch (error) {
                 console.error(error);
@@ -100,18 +87,20 @@ export default {
               const indexMax = AppState.killers.length - 1;
               const randomKillerIndex = Math.floor(Math.random() * (indexMax - indexMin + 1) + indexMin);
               AppState.randomKiller = AppState.killers[randomKillerIndex];
-              console.log("random killer:", AppState.randomKiller.killer_name)
+              // console.log("random killer:", AppState.randomKiller.killer_name)
             } catch (error) {
               console.error(error)
             }
         }
 
         onMounted(() => {
-          survivorsService.getAllSurvivors();
-          AppState.survivorPerksOnly = true;
-          AppState.killerPerksOnly = false;
-          getRandomSurvivor();
-          generateRandomLoadout("Survivor");
+            statusEffectsService.getAllStatusEffects();
+            AppState.survivorPerksOnly = true; 
+            AppState.killerPerksOnly = false;
+            perksService.getAllPerks("Survivor");
+            survivorsService.getAllSurvivors();
+            getRandomSurvivor();
+            generateRandomLoadout("Survivor");
         });
 
         watchEffect(() => {
@@ -119,6 +108,7 @@ export default {
             AppState.randomKiller;
             AppState.loadout;
         });
+
         return {
             generateRandomLoadout,
             loadout: computed(() => AppState.loadout),
@@ -133,6 +123,7 @@ export default {
               if (AppState.survivorPerksOnly == false) {
                 AppState.survivorPerksOnly = true;
                 AppState.killerPerksOnly = false;
+                perksService.getAllPerks("Survivor");
                 await generateRandomLoadout("Survivor")
               } 
             },
@@ -141,6 +132,7 @@ export default {
               if (AppState.killerPerksOnly == false) {
                 AppState.killerPerksOnly = true;
                 AppState.survivorPerksOnly = false;
+                perksService.getAllPerks("Killer");
                 await generateRandomLoadout("Killer");
               }
             }

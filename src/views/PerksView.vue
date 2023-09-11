@@ -25,9 +25,9 @@ export default {
                 console.error(error);
             }
         }
-        async function getAllKillerPerks() {
+        async function getPageFromKillerPerks() {
             try {
-                await perksService.getAllKillerPerks();
+                await perksService.getPageFromKillerPerks(AppState.pageNumber);
             }
             catch (error) {
                 console.error(error);
@@ -72,7 +72,7 @@ export default {
                   AppState.pages.push(pageNumber)
                 }
                 console.log("amount of pages:", AppState.pages.length)
-                getAllKillerPerks();
+                getPageFromKillerPerks();
             }
             else if (AppState.survivorPerksOnly == true) {
                 AppState.maxPageNumber = 5;
@@ -115,7 +115,7 @@ export default {
                   AppState.pages.push(pageNumber)
                 }
                 console.log("pages:", AppState.pages)
-                getAllKillerPerks();
+                getPageFromKillerPerks();
             }
             else if (AppState.survivorPerksOnly == true) {
                 AppState.maxPageNumber = 5;
@@ -150,7 +150,7 @@ export default {
             killerPerksOnly: computed(() => AppState.killerPerksOnly),
             editable,
             getPageFromAllPerks,
-            getAllKillerPerks,
+            getPageFromKillerPerks,
             getPageFromSurvivorPerks,
 
             setPage(pageNumber) {
